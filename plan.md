@@ -31,13 +31,15 @@ A place to write about code
 ### Database structure
 
 #### tables 
--Posts
-| columns | Data type  |
-|---------|------------|
-| id      | Primary Key|
-| Title   | Varchar()  |
-| Post    | Text       |
-| Created | Timestamp  |
+
+ `Posts`
+
+| columns  | Data type  |
+|----------|------------|
+| `id`     | Primary Key|
+| `title`  | Varchar()  |
+| `post`   | Text       |
+| `created`| Timestamp  |
 
 
 ```JSON
