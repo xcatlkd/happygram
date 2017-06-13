@@ -1,10 +1,14 @@
 {
   "name": "blogapp",
   "version": "1.0.0",
-  "description": "Porfolio / bloggin app",
+  "description": "Porfolio / blogging app",
   "main": "app.js",
+  "engines": {
+    "node": "7.10.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
