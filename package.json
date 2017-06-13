@@ -1,0 +1,26 @@
+{
+  "name": "blogapp",
+  "version": "1.0.0",
+  "description": "Porfolio / bloggin app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xcatlkd/blogapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xcatlkd/blogapp/issues"
+  },
+  "homepage": "https://github.com/xcatlkd/blogapp#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "pg": "^6.2.4",
+    "pug-cli": "^1.0.0-alpha6",
+    "sequelize": "^4.1.0"
+  }
+}
