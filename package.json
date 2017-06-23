@@ -1,5 +1,5 @@
 {
-  "name": "blogapp",
+  "name": "Happygram",
   "version": "1.0.0",
   "description": "Porfolio / blogging app",
   "main": "app.js",
@@ -12,17 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xcatlkd/blogapp.git"
+    "url": "git+https://github.com/xcatlkd/happygram.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xcatlkd/blogapp/issues"
+    "url": "https://github.com/xcatlkd/happygram/issues"
   },
-  "homepage": "https://github.com/xcatlkd/blogapp#readme",
+  "homepage": "https://github.com/xcatlkd/happygram#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "express-sessions": "^1.0.6",
+    "nodemon": "^1.11.0",
     "pg": "^6.2.4",
     "pug-cli": "^1.0.0-alpha6",
     "sequelize": "^4.1.0"
