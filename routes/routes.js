@@ -4,15 +4,15 @@ const express = require('express');
 const router = express.Router();
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const session = require('express-session');
+const session = require('express-sessions');
 
 // database configurations  #############################
 
 const sql = require('../util/sql');
 const User = require('../models/user');
 const Photo = require('../models/photo');
-const Comment = require('../models/comment');
-const Like = require('../models/like');
+// const Comment = require('../models/comment');
+// const Like = require('../models/like');
 
 // middleware  #########################################
 
