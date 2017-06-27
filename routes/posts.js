@@ -23,4 +23,14 @@ app.post("/posts", uploader.single("image"), function(req, res) {
   	})
 });
 
+app.get("/destinations", function(req, res) {
+	Gram.getAll()
+		.then(function(blog, body) {
+			renderTemplate(res, "Destinations", "destinations", {
+				blog: blog,
+
+			});
+		});
+});
+
  module.exports = router;
