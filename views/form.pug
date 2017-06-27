@@ -1,0 +1,18 @@
+				//- <% if (typeof error !== "undefined") { %>
+				//- 	<p class="home-form-error"><%- error.message %></p>
+				//- <% } %>
+
+<div class="post">
+	<h1 class="home-title">Travel</h1>
+<form class="home-form" method="post" enctype="multipart/form-data">
+			<input type="text" name="title" placeholder="title" class="add-input" />
+			<textarea name="comment" rows="4" class="add-text" placeholder="Comment"></textarea>
+		
+				<label class="home-form-file">
+					<div class="home-form-file-label">Choose a file</div>
+					<input class="home-form-file-input" name="image" type="file"/>
+				</label>
+				<button class="add-btn">Add</button>
+			</form>
+		
+	</div>
