@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/xcatlkd/blogapp#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "nodemon": "^1.11.0",
     "pg": "^6.2.4",
     "pug-cli": "^1.0.0-alpha6",
     "sequelize": "^4.1.0"
