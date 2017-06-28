@@ -22,4 +22,4 @@ app.post("/posts", uploader.single("image"), function(req, res) {
   	})
 });
 
- module.exports = router;
+module.exports = router;
