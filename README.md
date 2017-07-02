@@ -48,7 +48,6 @@ A photo sharing app that in no way infringes on any other photos sharing apps be
 
 ```
 
-
 ### DB schema
 
 ![schema](assets/images/Happygram_schema_uml.jpg)
