@@ -8,6 +8,7 @@ A photo sharing app that in no way infringes on any other photos sharing apps be
 
 
 ### Project organization / file tree
+```
 
 ├── app.js 																# Entry point of the app
 ├── assets																# Static assets folder
@@ -44,7 +45,7 @@ A photo sharing app that in no way infringes on any other photos sharing apps be
     ├── home.pug
     ├── layout.pug
     └── template.pug
-
+```
 
 ### DB schema
 
