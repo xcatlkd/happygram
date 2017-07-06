@@ -12,13 +12,13 @@ const Photos = sql.define('photo', {
 		autoIncrement: true,
 	},
 	photo: {
-		type: Sequelize.BLOB,
+		type: Sequelize.STRING,
 		notNull: true,
 	},
 	description: {
 		type: Sequelize.TEXT,
 		notNull: true,
-	}
+	},
 });
 
 Photos.hasMany(Comments);
