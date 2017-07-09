@@ -1,0 +1,20 @@
+
+head 
+	title Signup
+	link(rel="stylesheet", href="styles/reset.css")
+	link(rel="stylesheet", href="main/reset.css")
+
+body#signup
+	.container
+		form(method="POST", id="signup-form")
+			h2 Signup
+			.form-error.username.hidden Please enter a valid username
+			input(name="username", placeholder="Username", type="text")
+			.form-error.password.hidden Please enter a valid username
+			input(name="password", placeholder="Password", type="password")
+			.form-error.confirm.hidden Passwords must match
+			input(name="confirm", placeholder="Confirm your password", type="password")
+			button Submit
+
+
+	script(src="scripts/formSubmit.js")

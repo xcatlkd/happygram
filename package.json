@@ -21,10 +21,13 @@
   },
   "homepage": "https://github.com/xcatlkd/happygram#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
+    "connect-session-sequelize": "^4.1.0",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "express-session": "^1.15.3",
     "express-sessions": "^1.0.6",
     "fs": "0.0.1-security",
     "fs-extra": "^3.0.1",

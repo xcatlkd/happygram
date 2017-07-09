@@ -10,7 +10,7 @@ const Photos = require('./photo');
 const Likes = require('./like');
 const Comments = require('./comment');
 
-const Users = sql.define('user', {
+const User = sql.define('user', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -27,7 +27,7 @@ const Users = sql.define('user', {
 	},
 	isActive: {
 		type: Sequelize.BOOLEAN,
-	}, {
+	}}, {
 	hooks: {
 		beforeCreate: hashUserPassword,
 		beforeUpdate: hashUserPassword,
@@ -52,15 +52,27 @@ User.prototype.comparePassword = function(password) {
 	return bcrypt.compare(pw, this.get("password"));
 };
 
-User.prototype.uploadImage = function(file) {
+// User.prototype.uploadImage = function(file) {
 
+// };
+
+User.signup = function(req) {
+	return User.create({
+		username: req.body.username,
+		password: req.body.password,
+		isActive: true,
+	})
+	.then(function(user) {
+		console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&  User.signup/  User model", user.dataValues.id);
+		req.session.userid = user.dataValues.id;
+		return user.dataValues;
+	})
 };
 
 
-
 // define table relations
-Users.hasMany(Photos);
-Users.hasMany(Comments);
-Users.hasMany(Likes);
+User.hasMany(Photos);
+User.hasMany(Comments);
+User.hasMany(Likes);
 
-module.exports = Users;
+module.exports = User;
