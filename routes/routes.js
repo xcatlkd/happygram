@@ -25,6 +25,9 @@ router.get('/', function(req, res) {
 	res.render("layout", { page: "home" });
 });
 
+router.get('/photoform', function(req, res) {
+	res.render("form");
+});
 
 
 module.exports = router;
