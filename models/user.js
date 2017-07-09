@@ -1,15 +1,19 @@
 const sql = require('../util/sql');
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
+
+const path = require('path');
+const Jimp = require('jimp');
+
 // import table dependencies
 const Files = require('./file');
 const Likes = require('./like');
 const Comments = require('./comment');
 const fs = require("fs-extra");
-const path = require("path");
-const Jimp = require("jimp");
 
 
-const Users = sql.define('user', {
+
+const User = sql.define('user', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -24,10 +28,17 @@ const Users = sql.define('user', {
 		type: Sequelize.STRING,
 		notNull: true,
 	},
-	
+	isActive: {
+		type: Sequelize.BOOLEAN,
+	}}, {
+	hooks: {
+		beforeCreate: hashUserPassword,
+		beforeUpdate: hashUserPassword,
+	},
 });
 
-Users.prototype.upload = function(file) {
+
+User.prototype.upload = function(file) {
 		return this.createFile({
 				id: file.filename,
 				size: file.size,
@@ -53,12 +64,30 @@ Users.prototype.upload = function(file) {
 					})
 				}		
 
+// additional user functionality
+
+function hashUserPassword(user) {
+	if (user.password) {
+		return bcrypt.genSalt()
+		.then(function(salt) {
+			return bcrypt.hash(user.password, salt);
+		})
+		.then(function(hashedPassword) {
+			user.password = hashedPassword;
+		});
+	}
+};
+
+User.prototype.comparePassword = function(password) {
+	return bcrypt.compare(pw, this.get("password"));
+};
 
 
 
 // define table relations
-Users.hasMany(Files);
-Users.hasMany(Comments);
-Users.hasMany(Likes);
 
-module.exports = Users;
+User.hasMany(Files);
+User.hasMany(Comments);
+User.hasMany(Likes);
+
+module.exports = User;

@@ -2,7 +2,7 @@ const exp = require("express");
 const User = require("../models/user");
 const Gram = ("./util/gram");
 const router = exp.Router();
-const renderTemplate = require("../util/renderTemplate");
+
 const multer = require("multer");
 const uploader = multer({
 	dest: "uploads/"
@@ -87,4 +87,6 @@ router.post("/", uploader.single("image"), function(req, res) {
 			});
 
 
-			module.exports = router;
+
+ module.exports = router;
+
