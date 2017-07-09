@@ -14,6 +14,10 @@ const app = express();
 
 // .env configuration variables #################################
 
+const postsRoutes = require('./routes/posts');
+const routes = require('./routes/routes');
+// const renderTemplate = require("./util/renderTemplate");
+
 const port = process.env.PORT || 8080;
 const cookieSecret = process.env.COOKIE_SECRET || "don";
 
@@ -46,6 +50,7 @@ app.use('/user', user);
 app.use(express.static("assets"));
 
 // Sync db and launch server #####################################
+app.use("/form", postsRoutes);
 
 sql.sync({ force: true }).then(function() {
 	app.listen(port, function(){
@@ -53,3 +58,4 @@ sql.sync({ force: true }).then(function() {
 	});
 });
 
+        
