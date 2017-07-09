@@ -5,9 +5,9 @@ const Gram  = {
 		return Posts.findAll();
 	},
 
-	add: function(title, comment, image) {
+	add: function(comment, image) {
 		return Posts.create({
-			title: title,
+			
 			comment: comment,
 			image: image
 
@@ -15,23 +15,23 @@ const Gram  = {
 
 	},
     
-    update: function(title, comment, like) {
+    update: function(comment, like) {
 	return Posts.update ({
-			title: title,
+			
 			comment: comment,
 			like: like
 	});
 },
-	delete: function(title) {
-		return Posts.destroy({
-			where: {
-			   userid: 
-				title:
+	// delete: function(image) {
+	// 	return Posts.destroy({
+	// 		where: {
+	// 		   userid: 
+	// 			title:
 
 
-			}
-		})
-	}
+	// 		}
+	// 	})
+	// }
 
 		search: function(search) {
 		return Posts.findAll({

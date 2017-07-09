@@ -10,7 +10,7 @@ const session = require('express-sessions');
 
 const sql = require('../util/sql');
 const User = require('../models/user');
-const Photo = require('../models/photo');
+const Photo = require('../models/file');
 // const Comment = require('../models/comment');
 // const Like = require('../models/like');
 
