@@ -10,7 +10,7 @@ const Photos = require('./photo');
 const Likes = require('./like');
 const Comments = require('./comment');
 
-const Users = sql.define('user', {
+const User = sql.define('user', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -27,7 +27,7 @@ const Users = sql.define('user', {
 	},
 	isActive: {
 		type: Sequelize.BOOLEAN,
-	}, {
+	}}, {
 	hooks: {
 		beforeCreate: hashUserPassword,
 		beforeUpdate: hashUserPassword,
@@ -59,8 +59,8 @@ User.prototype.uploadImage = function(file) {
 
 
 // define table relations
-Users.hasMany(Photos);
-Users.hasMany(Comments);
-Users.hasMany(Likes);
+User.hasMany(Photos);
+User.hasMany(Comments);
+User.hasMany(Likes);
 
-module.exports = Users;
+module.exports = User;
