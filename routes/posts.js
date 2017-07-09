@@ -42,12 +42,12 @@ router.post("/", uploader.single("image"), function(req, res) {
 			}
 	
 			//Otherwise, try an upload
-			 	req.User.upload(req.file).then(function() {
+			 	req.user.upload(req.file).then(function() {
 						res.redirect("/gram?success=1")
 			  		})
 			 		.catch(function(err) {
 			 			console.error("Something went wrong with upload", err);
-			 			renderTemplate(req, res, "Upload a File", "form", {
+			 			render("Upload a File", "form", {
 						error: "Something went wrong, please try a different file",
 			 			});
 			 		});
