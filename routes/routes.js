@@ -16,8 +16,14 @@ const Photo = require('../models/file');
 
 // middleware  #########################################
 
+// loggedOutMW will check if user.session and redirect to user/:userid
+// else next();
 
+// const sessionMW = require('../middleware/sessionMW');
+const loggedOutMW = require('../middleware/loggedOutMW');
 
+// router.use(sessionMW);
+// router.use(loggedOutMW);
 
 // routes  #############################################
 
@@ -25,9 +31,32 @@ router.get('/', function(req, res) {
 	res.render("layout", { page: "home" });
 });
 
-router.get('/photoform', function(req, res) {
-	res.render("form");
+router.get('/signup', function(req, res) {
+		res.render("signup", { page: "home" });
 });
 
+router.post('/signup', function(req, res) {
+
+	if (req.body.password && req.body.password === req.body.confirm) {
+		User.signup(req)
+		.then(function(user) {
+			console.log("*************************************************************************************", user);
+			res.redirect('/user/home');
+		})
+		.catch(function(err) {
+			console.error(err);
+		})
+	} else {
+
+	}
+});
+
+router.get('/login', function(req, res) {
+	res.render("login");
+});
+
+router.post('/login', function(req, res) {
+
+});
 
 module.exports = router;

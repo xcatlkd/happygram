@@ -1,0 +1,13 @@
+
+
+
+
+/*
+body#signup .hidden {
+	display: none;
+}*/
+
+.form-error {
+	color: red;
+	font-size: 16px;
+}

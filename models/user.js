@@ -83,6 +83,18 @@ User.prototype.comparePassword = function(password) {
 };
 
 
+User.signup = function(req) {
+	return User.create({
+		username: req.body.username,
+		password: req.body.password,
+		isActive: true,
+	})
+	.then(function(user) {
+		req.session.userid = user.dataValues.id;
+		return user.dataValues;
+	})
+};
+
 
 // define table relations
 
