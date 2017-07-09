@@ -8,8 +8,8 @@ const uploader = multer({
 	dest: "uploads/"
 });
 
-const fs = require('fs');
 
+const fs = require("fs-extra");
 // Render all of a user's documents
 // router.get("/", function(req, res) {
 // 	let message = "";
