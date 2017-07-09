@@ -1,53 +1,50 @@
 
-	head
+head
 
-		title Alex's #{title}
-		link(rel="stylesheet", type="text/css", href="/css/reset.css")
-		link(rel="stylesheet" type="text/css" href="/css/main.css")
-	    link(rel="stylesheet" type="text/css" href="/css/pills.css")
+	title Alex's #{title}
+	link(rel="stylesheet", type="text/css", href="/css/reset.css")
+	link(rel="stylesheet" type="text/css" href="/css/main.css")
+	link(rel="stylesheet" type="text/css" href="/css/pills.css")
 		
 	
-	body
-		div.container
-        div.nav
-      h1 Alex Polotskiy
-          ul.menu
-                li
-                	a(href="/") About Me
-                li  
-                    a(href="/") destinations Destinations
-                li  
-                    a(href="/search") Search-Destination
-          		li  
-          		    a(href="/posts") Admin
-          
-    
-    
+body
+	div.container
+		div.nav
+			h1 Alex Polotskiy
+			ul.menu
+				li
+					a(href="/") About Me
+				li
+					a(href="/") destinations Destinations
+				li
+					a(href="/search") Search-Destination
+				li
+					a(href="/posts") Admin
+
 		
-		<main class="template">
+					<main class="template">
 		
-			if (page) 
-				-include("./pages/" + #{page, pageArgs})
-			else 
-				No page variable provided!
+						//- if (page)
+						//- 	-include #{page} 
+						//- else 
+						//- 	No page variable provided!
 			
 			
-	    
+	
 			
 			
 		
 	
-	footer
-	a(href="#") 
+footer
+	a(href="#")
 		img.icon1(src="http://www.worldyogacenter.com/wp-content/uploads/2014/01/facebooktransparent.png")
 
-	//- <a href="#"><img class="icon2" src="https://farm8.staticflickr.com/7058/6937175085_ea4714c6a8_b.jpg"/></a>
+	
  
-    a(href="#")
-    	img.icon2(src="https://farm8.staticflickr.com/7205/6779161210_c237861b66_b.jpg")
+	a(href="#")
+		img.icon2(src="https://farm8.staticflickr.com/7205/6779161210_c237861b66_b.jpg")
 
 	
 	a(href="#")
 		img.icon3(src="http://flaticns.com/web-icons/github.png")
- 
- 
+
