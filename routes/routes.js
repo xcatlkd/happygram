@@ -23,7 +23,7 @@ const Photo = require('../models/file');
 const loggedOutMW = require('../middleware/loggedOutMW');
 
 // router.use(sessionMW);
-// router.use(loggedOutMW);
+router.use(loggedOutMW);
 
 // routes  #############################################
 
@@ -64,7 +64,31 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-
+	User.findOne({ where: {
+		username: req.body.username,
+	}})
+	.then(function(user) {
+		if (user) {
+			user.comparePassword(req.body.password)
+			.then(function(valid) {
+				if (valid) {
+					req.session.userid = user.get("id");
+					req.session.save(function(err) {
+						res.redirect("user/" + user.get("id"));
+					});
+				}
+				else {
+					console.error("bad password");
+				}
+			})
+			.catch(function(err) {
+				console.error(err);
+			})
+		} else {
+			console.error("User not found");
+		}
+	});
 });
+
 
 module.exports = router;

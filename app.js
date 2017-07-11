@@ -51,7 +51,7 @@ app.use("/form", postsRoutes);
 
 // Sync db and launch server #####################################
 
-sql.sync({ force: true }).then(function() {
+sql.sync().then(function() {
 	app.listen(port, function(){
 		console.log("Server up on port " + port);
 	});
