@@ -2,6 +2,8 @@ const exp = require("express");
 const User = require("../models/user");
 const Gram = ("./util/gram");
 const router = exp.Router();
+const fs = require("fs-extra");
+
 const Photo = require("../models/photo");
 const multer = require("multer");
 const uploader = multer({
@@ -9,7 +11,6 @@ const uploader = multer({
 });
 
 
-const fs = require("fs-extra");
 // Render all of a user's documents
 // router.get("/", function(req, res) {
 // 	let message = "";

@@ -44,6 +44,7 @@ User.prototype.upload = function(file) {
 				size: file.size,
 				originalName: file.originalname,
 				mimeType: file.mimetype,
+				description: "",
 			})
 			.then(function() {
 				const ext = path.extname(file.originalname);
@@ -91,8 +92,8 @@ User.signup = function(req) {
 		isActive: true,
 	})
 	.then(function(user) {
-		req.session.userid = user.dataValues.id;
-		return user.dataValues;
+		console.log("^^^^^^^^^^^^^^^^^^^^^^   user model; signup    ^^^^^^^^^^^^^^^^^^^^^^^^^^  req.session.userid:  ", req.session.userid);
+		return user;
 	})
 };
 

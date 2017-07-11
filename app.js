@@ -10,27 +10,26 @@ const bodyParser = require('body-parser');
 const connectSessionSequelize = require('connect-session-sequelize');
 
 const sql = require('./util/sql');
+const deserializeUser = require('./middleware/deserializeUser');
 const app = express();
+const SessionStore = connectSessionSequelize(session.Store);
 
 // .env configuration variables #################################
-
-const postsRoutes = require('./routes/posts');
-// const renderTemplate = require("./util/renderTemplate");
 
 const port = process.env.PORT || 8080;
 const cookieSecret = process.env.COOKIE_SECRET || "don";
 
 // App - wide configurations ####################################
 
-const deserializeUser = require('./middleware/deserializeUser');
-const SessionStore = connectSessionSequelize(session.Store);
-
+app.set('view engine', 'pug');
+app.use(express.static("assets"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser(cookieSecret));
 app.use(session({
-	secret: cookieSecret,
 	store: new SessionStore({ db: sql }),
+	secret: cookieSecret,
+	resave: false
 }));
 app.use(deserializeUser);
 
@@ -38,20 +37,21 @@ app.use(deserializeUser);
 
 const routes = require('./routes/routes');
 const user = require('./routes/user');
+const postsRoutes = require('./routes/posts');
+// const renderTemplate = require("./util/renderTemplate");
 // const posts = require('./routes/posts');
+
+app.use('/', routes);
+app.use('/user', user);
+app.use("/form", postsRoutes);
+// app.use('/posts', posts);
 
 // File structure configurations #################################
 
-app.set('view engine', 'pug');
-app.use('/', routes);
-app.use('/user', user);
-// app.use('/posts', posts);
-app.use(express.static("assets"));
 
 // Sync db and launch server #####################################
-app.use("/form", postsRoutes);
 
-sql.sync().then(function() {
+sql.sync({ force: true }).then(function() {
 	app.listen(port, function(){
 		console.log("Server up on port " + port);
 	});
