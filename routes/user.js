@@ -2,16 +2,9 @@
 
 const express = require('express');
 const router = express.Router();
-// const cookieParser = require('cookie-parser');
-// const bodyParser = require('body-parser');
-// const session = require('express-sessions');
-
-// router.use(bodyParser.urlencoded());
-// router.use(bodyParser.json());
 
 // database configurations  #############################
 
-// const sql = require('../util/sql');
 const User = require('../models/user');
 const Photo = require('../models/photo');
 // Photo model should have a method for requesting all comments and like
@@ -21,11 +14,8 @@ const Photo = require('../models/photo');
 
 // middleware  #########################################
 
-// const deserializeUser = require('../middleware/deserializeUser');
-// router.use(deserializeUser);
 
 // routes  #############################################
-
 
 router.get('/home', function(req, res) {
 	console.log("******************   '/user/home'    ****************************** req.session: ", req.session);
@@ -33,7 +23,12 @@ router.get('/home', function(req, res) {
 });
 
 router.get('/:userId', function(req, res) {
-	res.render("", { user: ""}) ;
+	res.render("home", { user: req.user }) ;
+});
+
+router.post('/logout', function(req, res) {
+	req.session.destroy();
+	res.redirect('../');
 });
 
 module.exports = router;

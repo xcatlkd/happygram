@@ -64,6 +64,34 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
+<<<<<<< Updated upstream
+=======
+	User.findOne({ where: {
+		username: req.body.username,
+	}})
+	.then(function(user) {
+		if (user) {
+			user.comparePassword(req.body.password)
+			.then(function(valid) {
+				if (valid) {
+					req.session.userid = user.get("id");
+					req.session.save(function(err) {
+						res.redirect("/user/home");
+					});
+				}
+				else {
+					console.error("bad password");
+				}
+			})
+			.catch(function(err) {
+				console.error(err);
+			})
+		} else {
+			console.error("User not found");
+		}
+	});
+});
+>>>>>>> Stashed changes
 
 });
 

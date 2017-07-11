@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 h1.dest Welcome to Travel Blog!
 			for (let i = 0; i < blog.length; i++) 
 					div
@@ -9,6 +10,14 @@ h1.dest Welcome to Travel Blog!
 				img #{photo.filename}
 				p #{photo.description}
 		
+=======
+h1.dest Welcome to Travel Blog!		
+	
+	for user in photos
+		h3.photo #{user.photos}
+		p.description #{user.description}
+		img.image(src=`files/${user.id}.jpg`)
+>>>>>>> Stashed changes
 
 
 		

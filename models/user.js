@@ -80,7 +80,7 @@ function hashUserPassword(user) {
 };
 
 User.prototype.comparePassword = function(password) {
-	return bcrypt.compare(pw, this.get("password"));
+	return bcrypt.compare(password, this.get("password"));
 };
 
 
@@ -96,6 +96,36 @@ User.signup = function(req) {
 	})
 };
 
+<<<<<<< Updated upstream
+=======
+User.prototype.login = function(req) {
+	User.findOne({ where:	{
+		username: req.body.username,
+	}})
+	.then(function(user) {
+		if (user) {
+			user.comparePassword(req.body.password).then(function(valid) {
+				if (valid) {
+					req.session.userid = user.get("id");
+					req.session.save(function(err) {
+						res.redirect("/user/home");
+					})
+				}
+				else {
+					console.error("bad password");
+				}
+			})
+			.catch(function(err) {
+				console.error(err);
+			})
+		}
+		else {
+			console.error("User not found");
+		}
+	})
+};
+
+>>>>>>> Stashed changes
 
 // define table relations
 
