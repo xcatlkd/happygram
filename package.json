@@ -28,7 +28,6 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
-    "express-sessions": "^1.0.6",
     "fs": "0.0.1-security",
     "fs-extra": "^3.0.1",
     "jimp": "^0.2.28",

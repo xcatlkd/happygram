@@ -4,8 +4,10 @@ h1.dest Welcome to Travel Blog!
 					div.pic
 						img(src="blog[i].image")
 					div.text-title (blog[i].title)
-					div.text-comment (blog[i].comment) 
-			        
+					div.text-comment (blog[i].comment)
+			for photo in user
+				img #{photo.filename}
+				p #{photo.description}
 		
 
 

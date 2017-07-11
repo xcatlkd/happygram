@@ -2,13 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const session = require('express-sessions');
+// const cookieParser = require('cookie-parser');
+// const bodyParser = require('body-parser');
+// const session = require('express-sessions');
 
 // database configurations  #############################
 
-const sql = require('../util/sql');
+// const sql = require('../util/sql');
 const User = require('../models/user');
 const Photo = require('../models/file');
 // const Comment = require('../models/comment');
@@ -32,6 +32,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/signup', function(req, res) {
+		req.session.destroy();
 		res.render("signup", { page: "home" });
 });
 
@@ -40,8 +41,15 @@ router.post('/signup', function(req, res) {
 	if (req.body.password && req.body.password === req.body.confirm) {
 		User.signup(req)
 		.then(function(user) {
-			console.log("*************************************************************************************", user);
-			res.redirect('/user/home');
+			console.log('Should happen after save.');
+			req.session.userid = user.dataValues.id;
+			console.log("************************************  /signup   *************************************   req.session: ", req.session);
+			console.log('Redirecting now')
+
+			req.session.save(function (err) {
+				res.redirect("/user/home");
+			});
+					
 		})
 		.catch(function(err) {
 			console.error(err);
