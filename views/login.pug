@@ -1,0 +1,19 @@
+head 
+	title Signup
+	link(rel="stylesheet", href="styles/reset.css")
+	link(rel="stylesheet", href="main/reset.css")
+
+include navbar.pug
+
+body#login
+	.container
+		form(method="POST", id="login-form")
+			h2 Login
+			.form-error.username.hidden Please enter a valid username
+			input(name="username", placeholder="Username", type="text" required)
+			.form-error.password.hidden Please enter a valid username
+			input(name="password", placeholder="Password", type="password" required)
+			button Submit
+
+
+	script(src="scripts/formSubmit.js")

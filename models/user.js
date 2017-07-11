@@ -97,6 +97,33 @@ User.signup = function(req) {
 	})
 };
 
+User.prototype.login = function(req) {
+	User.findOne({ where:	{
+		username: req.body.username,
+	}})
+	.then(function(user) {
+		if (user) {
+			user.comparePassword(req.body.password).then(function(valid) {
+				if (valid) {
+					req.session.userid = user.get("id");
+					req.session.save(function(err) {
+						res.redirect("user/" + user.get("id"));
+					})
+				}
+				else {
+					console.error("bad password");
+				}
+			})
+			.catch(function(err) {
+				console.error(err);
+			})
+		}
+		else {
+			console.error("User not found");
+		}
+	})
+};
+
 
 // define table relations
 
