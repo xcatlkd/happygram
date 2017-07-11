@@ -3,8 +3,8 @@ const User = require("../models/user");
 const Gram = ("./util/gram");
 const router = exp.Router();
 const fs = require("fs-extra");
-
-const Photo = require("../models/photo");
+const Files = require("../models/file");
+const Photos = require("../models/photo");
 const multer = require("multer");
 const uploader = multer({
 	dest: "uploads/"
@@ -36,30 +36,34 @@ router.get("/", function(req, res) {
 // Upload the form at GET /docs/upload
 router.post("/", uploader.single("image"), function(req, res) {
 	// Make sure they sent a file
+	console.log(req.file, req.file.path, req.file.filename, req.file.destination, "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+	return Photos.create(req.file.filename).then(function(photo, destination){
+		photo: photo,
+ console.log(photo,"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")	
 	if (!req.file) {
 		res.render("form", {
 			error: "You must choose a file to upload",
 		})
 	}
-
 	//Otherwise, try an upload
 	 req.user.upload(req.file).then(function() {
 			res.redirect("/form/gram")
 		})
+})
 		.catch(function(err) {
 			console.error("Something went wrong with upload", err);
 			render("Upload a File", "form", {
 				error: "Something went wrong, please try a different file",
 			});
 		});
+})
 
-});
 //Render an individual document
 router.get("/gram/:fileId", function(req, res) {
-	Photo.findById(req.params.fileId).then(function(file) {
+	Photos.findById(req.params.fileId).then(function(file) {
 			console.log(file, ")))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((")
 			if (file) {
-				res.render(file.get("name"), "gram", {
+				res.render(file.get("id"), "gram", {
 					file: file,
 				});
 			} else {
@@ -74,10 +78,10 @@ router.get("/gram/:fileId", function(req, res) {
 });
 
 router.get("/gram", function(req, res) {
-	Photo.findAll({ order: [['createdAt', 'DESC']] }).then(function(photos) {
-		console.log(photos, "9999999999999999999999999999999999999999999999999999999999999999999999999999999999")
+	Files.findAll({ order: [['createdAt', 'DESC']] }).then(function(photo) {
+		console.log(photo, "9999999999999999999999999999999999999999999999999999999999999999999999999999999999")
 		res.render("gram", { 
-			photos: photos,
+			photo: photo,
 			
 		});
 	});

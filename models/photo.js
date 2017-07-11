@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 const User = require('./user');
 const Likes = require('./like');
 const Comments = require('./comment');
+const Files = require('./file');
 const path = require("path");
 
 const Photos = sql.define('photo', {
@@ -24,6 +25,7 @@ const Photos = sql.define('photo', {
 
 Photos.hasMany(Comments);
 Photos.hasMany(Likes);
+Photos.hasMany(Files);
 
 // create the relations between comments and likes here
 
