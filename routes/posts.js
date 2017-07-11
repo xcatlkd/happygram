@@ -2,6 +2,7 @@ const exp = require("express");
 const User = require("../models/user");
 const Gram = ("./util/gram");
 const router = exp.Router();
+const fs = require("fs-extra");
 
 const multer = require("multer");
 const uploader = multer({
@@ -9,7 +10,6 @@ const uploader = multer({
 });
 
 
-const fs = require("fs-extra");
 // Render all of a user's documents
 // router.get("/", function(req, res) {
 // 	let message = "";
@@ -40,7 +40,7 @@ router.post("/", uploader.single("image"), function(req, res) {
 					error: "You must choose a file to upload",
 				});
 			}
-	
+			else {
 			//Otherwise, try an upload
 			 	req.user.upload(req.file).then(function() {
 						res.redirect("/gram?success=1")
@@ -51,6 +51,7 @@ router.post("/", uploader.single("image"), function(req, res) {
 						error: "Something went wrong, please try a different file",
 			 			});
 			 		});
+			}	
 			 
 	});
 			//Render an individual document

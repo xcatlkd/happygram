@@ -46,7 +46,7 @@ router.post('/signup', function(req, res) {
 			console.log("************************************  /signup   *************************************   req.session: ", req.session);
 			console.log('Redirecting now')
 
-			req.session.save(function (err) {
+			req.session.save(function(err) {
 				res.redirect("/user/home");
 			});
 					
