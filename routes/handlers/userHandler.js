@@ -8,7 +8,7 @@ const path = require('path');
 
 // import table dependencies
 const User = require('../../models/user')
-const Photos = require('../../models/photo');
+
 
 
 

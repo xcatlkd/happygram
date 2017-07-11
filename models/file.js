@@ -6,12 +6,16 @@ const Likes = require('./like');
 const Comments = require('./comment');
 const fs = require("fs-extra");
 const path = require("path");
-// const Jimp = require("jimp");
+
 
 const Files = sql.define("file", {
 	id: {
 		type: Sequelize.STRING,
 		primaryKey: true,
+	},
+	description: {
+		type: Sequelize.TEXT,
+		notNull: true,
 	},
 	size: {
 		type: Sequelize.INTEGER,

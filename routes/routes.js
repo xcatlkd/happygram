@@ -10,7 +10,7 @@ const router = express.Router();
 
 // const sql = require('../util/sql');
 const User = require('../models/user');
-const Photo = require('../models/file');
+const File = require('../models/file');
 // const Comment = require('../models/comment');
 // const Like = require('../models/like');
 
@@ -23,7 +23,7 @@ const Photo = require('../models/file');
 const loggedOutMW = require('../middleware/loggedOutMW');
 
 // router.use(sessionMW);
-router.use(loggedOutMW);
+//router.use(loggedOutMW);
 
 // routes  #############################################
 

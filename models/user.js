@@ -6,7 +6,7 @@ const path = require('path');
 const Jimp = require('jimp');
 const Files = require('./file');
 // import table dependencies
-const Photos = require('./photo');
+
 const Likes = require('./like');
 const Comments = require('./comment');
 const fs = require("fs-extra");
@@ -127,7 +127,7 @@ User.prototype.login = function(req) {
 
 // define table relations
 
-User.hasMany(Photos);
+
 User.hasMany(Comments);
 User.hasMany(Likes);
 User.hasMany(Files);

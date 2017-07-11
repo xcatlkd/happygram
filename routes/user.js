@@ -13,7 +13,7 @@ const router = express.Router();
 
 // const sql = require('../util/sql');
 const User = require('../models/user');
-const Photo = require('../models/photo');
+
 // Photo model should have a method for requesting all comments and like
 // so no need to import those models explicitly..
 // const Comment = require('../models/comment');
