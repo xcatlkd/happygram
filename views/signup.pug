@@ -9,11 +9,11 @@ body#signup
 		form(method="POST", id="signup-form")
 			h2 Signup
 			.form-error.username.hidden Please enter a valid username
-			input(name="username", placeholder="Username", type="text")
+			input(name="username", placeholder="Username", type="text" required)
 			.form-error.password.hidden Please enter a valid username
-			input(name="password", placeholder="Password", type="password")
+			input(name="password", placeholder="Password", type="password" required)
 			.form-error.confirm.hidden Passwords must match
-			input(name="confirm", placeholder="Confirm your password", type="password")
+			input(name="confirm", placeholder="Confirm your password", type="password" required)
 			button Submit
 
 

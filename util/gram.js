@@ -1,4 +1,4 @@
-const Posts = require("../models/posts");
+const Posts = require("../models/photo");
 
 const Gram  = {
 	getAll: function() {
@@ -7,7 +7,6 @@ const Gram  = {
 
 	add: function(comment, image) {
 		return Posts.create({
-			
 			comment: comment,
 			image: image
 
@@ -45,3 +44,4 @@ const Gram  = {
 };
 
 module.exports = Gram;
+			
