@@ -1,9 +1,10 @@
 const sql = require('../util/sql');
 const Sequelize = require('sequelize');
 // import the comments and the likes models here
-const Users = require('./user');
+const User = require('./user');
 const Likes = require('./like');
 const Comments = require('./comment');
+const path = require("path");
 
 const Photos = sql.define('photo', {
 	id: {

@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 
 const path = require('path');
 const Jimp = require('jimp');
-
-// import table dependencies
 const Files = require('./file');
+// import table dependencies
+const Photos = require('./photo');
 const Likes = require('./like');
 const Comments = require('./comment');
 const fs = require("fs-extra");
@@ -53,11 +53,12 @@ User.prototype.upload = function(file) {
 			})
 			.then(function() {
 					// If I'm an image, we should generate thumbnail
-					// and preview images as well.
+					
 					if (file.mimetype.includes("image/")) {
 						Jimp.read(file.path).then(function(img) {
-							img.quality(80);
+							img.quality(90);
 							img.resize(Jimp.AUTO, 400);
+							// img.create(file.filename);
 							return img.write("assets/files/" + file.filename + ".jpg");
 						})
 					}
@@ -99,8 +100,8 @@ User.signup = function(req) {
 
 // define table relations
 
-User.hasMany(Files);
+User.hasMany(Photos);
 User.hasMany(Comments);
 User.hasMany(Likes);
-
+User.hasMany(Files);
 module.exports = User;
