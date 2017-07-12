@@ -14,6 +14,8 @@ const User = require('../models/user');
 
 // middleware  #########################################
 
+const userAuthMW = require('../middleware/userAuthMW');
+// router.use(userAuthMW);
 
 // routes  #############################################
 
@@ -22,13 +24,13 @@ router.get('/home', function(req, res) {
 	res.render("home", { user: req.user });
 });
 
-router.get('/:userId', function(req, res) {
-	res.render("home", { user: req.user }) ;
+router.get('/logout', function(req, res) {
+	req.session.userid = null;
+	res.redirect('../');
 });
 
-router.post('/logout', function(req, res) {
-	req.session.destroy();
-	res.redirect('../');
+router.get('/:userId', function(req, res) {
+	res.render("home", { user: req.user }) ;
 });
 
 module.exports = router;
