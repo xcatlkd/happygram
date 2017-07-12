@@ -41,11 +41,7 @@ router.post('/signup', function(req, res) {
 	if (req.body.password && req.body.password === req.body.confirm) {
 		User.signup(req)
 		.then(function(user) {
-			console.log('Should happen after save.');
 			req.session.userid = user.dataValues.id;
-			console.log("************************************  /signup   *************************************   req.session: ", req.session);
-			console.log('Redirecting now')
-
 			req.session.save(function(err) {
 				res.redirect("/user/home");
 			});
@@ -74,7 +70,7 @@ router.post('/login', function(req, res) {
 				if (valid) {
 					req.session.userid = user.get("id");
 					req.session.save(function(err) {
-						res.redirect("user/" + user.get("id"));
+						res.redirect("/user/home");
 					});
 				}
 				else {

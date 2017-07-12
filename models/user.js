@@ -81,7 +81,7 @@ function hashUserPassword(user) {
 };
 
 User.prototype.comparePassword = function(password) {
-	return bcrypt.compare(pw, this.get("password"));
+	return bcrypt.compare(password, this.get("password"));
 };
 
 
@@ -92,7 +92,6 @@ User.signup = function(req) {
 		isActive: true,
 	})
 	.then(function(user) {
-		console.log("^^^^^^^^^^^^^^^^^^^^^^   user model; signup    ^^^^^^^^^^^^^^^^^^^^^^^^^^  req.session.userid:  ", req.session.userid);
 		return user;
 	})
 };
@@ -107,7 +106,7 @@ User.prototype.login = function(req) {
 				if (valid) {
 					req.session.userid = user.get("id");
 					req.session.save(function(err) {
-						res.redirect("user/" + user.get("id"));
+						res.redirect("/user/home");
 					})
 				}
 				else {
