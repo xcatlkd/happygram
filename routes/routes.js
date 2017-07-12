@@ -28,7 +28,7 @@ const loggedOutMW = require('../middleware/loggedOutMW');
 // routes  #############################################
 
 router.get('/', function(req, res) {
-	res.render("layout", { page: "home" });
+	res.render("landing", { page: "home" });
 });
 
 router.get('/signup', function(req, res) {
