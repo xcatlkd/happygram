@@ -1,3 +1,9 @@
 include layout.pug
+	title Samigram
 include navbar.pug
-
+h1.landing-title Welcome to Sami-gram!
+//- .img-container
+//- 	img.landing-image(src=`../files/${data.id}.jpg`)
+for photos in data
+	.img-container
+		img.landing-image(src=`../files/${photos.id}.jpg`)
