@@ -5,7 +5,7 @@ const checkLoggedOut = function(req, res, next) {
 	if (!req.session.userid) {
 		next();
 	} else {
-		res.redirect('/user/:userId');
+		res.redirect('/user/home');
 	}
 }
 
