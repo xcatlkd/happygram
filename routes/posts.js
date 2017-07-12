@@ -10,24 +10,6 @@ const uploader = multer({
 	dest: "uploads/"
 });
 
-
-// Render all of a user's documents
-// router.get("/", function(req, res) {
-// 	let message = "";
-
-// 	if (req.query.success) {
-// 		message = "File uploaded succesfully!";
-// 	}
-
-// req.user.getFiles().then(function(file) {
-// 	render("gram", {
-// 		username: req.user.get("username"),
-// 		gram: gram,
-// 		message: message,
-// 	});
-// });
-// });
-
 // Render an upload form that POSTs to /docs/upload
 router.get("/", function(req, res) {
 	res.render("form");
@@ -41,9 +23,10 @@ router.post("/", uploader.single("image"), function(req, res) {
 			error: "You must choose a file to upload",
 		})
 	}
+	
 	//Otherwise, try an upload
 	 req.user.upload(req.file).then(function() {
-			res.redirect("/form/gram")
+			res.redirect("/form/description")
 		})
 		.catch(function(err) {
 			console.error("Something went wrong with upload", err);
@@ -53,11 +36,27 @@ router.post("/", uploader.single("image"), function(req, res) {
 		});
 })
 
+router.get("/description", function(req, res) {
+	res.render("description");
+})
+
+
+
+
+// router.post("/description", function(req,res){
+// 		user.updateFile({
+// 			description: req.body.description,
+// 		}).then(function(){
+// 			res.redirect("/description/gram")
+// 		})
+// })
+			
+	
 
 //Render an individual document
 router.get("/gram/:fileId", function(req, res) {
 	Files.findById(req.params.fileId).then(function(file) {
-			console.log(file, ")))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((")
+			console.log(file, ")))))))))))))))))))))))))))))))((((((((((((")
 			if (file) {
 				res.render(file.get("id"), "gram", {
 					files: file,
@@ -75,7 +74,7 @@ router.get("/gram/:fileId", function(req, res) {
 
 router.get("/gram", function(req, res) {
 	Files.findAll({ order: [['createdAt', 'DESC']] }).then(function(file) {
-		console.log(file, "9999999999999999999999999999999999999999999999999999999999999999999999999999999999")
+		console.log(file, "999999999999999999999999999999999999999999")
 		res.render("gram", { 
 			files: file,
 			

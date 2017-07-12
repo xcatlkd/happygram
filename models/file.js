@@ -31,6 +31,23 @@ const Files = sql.define("file", {
 	},
 });
 
+// Files.prototype.upload = function(req) {
+// 		return this.updateFile({
+// 				description: req.body.description,
+// 			})
+// 		}		
+
+// Files.find({ where: { fileId: id } })
+//   .then('success', function (project) {
+//     // Check if record exists in db
+//     if (project) {
+//       project.updateAttributes({
+//         title: 'a very different title now'
+//       })
+//       .success(function () {})
+//     }
+//   })
+
 
 
 						Files.hasMany(Comments);
