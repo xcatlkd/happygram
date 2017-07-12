@@ -8,8 +8,7 @@ function deserializeUser(req, res, next) {
 			if (user) {
 				req.user = user;
 			} else {
-				console.log("WTF")
-				// req.session.userid = null;
+				req.session.userid = null;
 			}
 			next();
 		})

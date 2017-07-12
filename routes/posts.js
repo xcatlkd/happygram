@@ -40,19 +40,6 @@ router.get("/description", function(req, res) {
 	res.render("description");
 })
 
-
-
-
-// router.post("/description", function(req,res){
-// 		user.updateFile({
-// 			description: req.body.description,
-// 		}).then(function(){
-// 			res.redirect("/description/gram")
-// 		})
-// })
-			
-	
-
 //Render an individual document
 router.get("/gram/:fileId", function(req, res) {
 	Files.findById(req.params.fileId).then(function(file) {

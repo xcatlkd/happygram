@@ -1,8 +1,10 @@
-h1.dest Welcome to Happy Gram!		
-	
+h1.dest Welcome to Sami-gram!	
+	br
 	for user in files
-		h3.photo #{user.id}
-		p.description #{user.description}
 		img.image(src=`../files/${user.id}.jpg`)
+		p.description #{user.description}
+
+		img.image(src=`../files/${user.id}.jpg`)
+
 
 		
