@@ -10,13 +10,13 @@ body#signup
 	.form-container
 		form(method="POST", id="signup-form")
 			h2 Signup
-			.form-error.username.hidden Please enter a valid username
+			.form-error.js-username.hidden Please enter a valid username
 			br
 			input(name="username", placeholder="Username", type="text" required)
-			.form-error.password.hidden Please enter a valid username
+			.form-error.js-password.hidden Please enter a valid username
 			br
 			input(name="password", placeholder="Password", type="password" required)
-			.form-error.confirm.hidden Passwords must match
+			.form-error.js-confirm.hidden Passwords must match
 			br
 			input(name="confirm", placeholder="Confirm your password", type="password" required)
 			br
