@@ -2,5 +2,9 @@ include layout.pug
 	title Home
 include usernav.pug
 h1 This is the "Home" page.
-	p #{user.username}
-	p #{user.id}
+	if (user) 
+		p #{user.username}
+		p #{user.id}
+	if (error) 
+		p #{error}
+		

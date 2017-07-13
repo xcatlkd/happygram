@@ -30,7 +30,23 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/:userId', function(req, res) {
-	res.render("home", { user: req.user }) ;
+	User.findOne({ where: {
+		id: req.params.userId,
+	}
+	})
+	.then(function(user) {
+		if (user) {
+			console.log(user);
+			res.render("home", { user: user }) ;
+		}
+		else {
+			res.render("home", { error: "No such user"});
+			console.log("No such user");
+		}
+	})
+	.catch(function(err) {
+		console.error(err);
+	})
 });
 
 module.exports = router;
