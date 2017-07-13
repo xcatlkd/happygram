@@ -25,7 +25,7 @@ router.get('/home', function(req, res) {
 		userId: req.user.id,
 	}})
 	.then(function(data) {
-		console.log("******************   '/user/home'    ******************* data: ", data, " req.user: ", req.user);
+		// console.log("******************   '/user/home'    ******************* data: ", data, " req.user: ", req.user);
 		res.render("home", { user: req.user, data: data });
 	})
 });
@@ -53,7 +53,7 @@ router.get('/:username', function(req, res) {
 			userId: user.id,
 		}})
 		.then(function(data) {
-			console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
+			// console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
 			res.render("home", { user: user, data: data });
 		})
 	})
