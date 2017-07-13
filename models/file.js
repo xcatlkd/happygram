@@ -1,11 +1,15 @@
 const sql = require('../util/sql');
 const Sequelize = require('sequelize');
 // import the comments and the likes models here
-const Users = require('./user');
+const User = require('./user');
 const Likes = require('./like');
 const Comments = require('./comment');
 const fs = require("fs-extra");
 const path = require("path");
+const multer = require("multer");
+const uploader = multer({
+	dest: "uploads/"
+});
 
 
 const Files = sql.define("file", {
@@ -31,25 +35,7 @@ const Files = sql.define("file", {
 	},
 });
 
-// Files.prototype.upload = function(req) {
-// 		return this.updateFile({
-// 				description: req.body.description,
-// 			})
-// 		}		
-
-// Files.find({ where: { fileId: id } })
-//   .then('success', function (project) {
-//     // Check if record exists in db
-//     if (project) {
-//       project.updateAttributes({
-//         title: 'a very different title now'
-//       })
-//       .success(function () {})
-//     }
-//   })
-
-
-
+	
 						Files.hasMany(Comments);
 						Files.hasMany(Likes);
 

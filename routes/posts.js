@@ -36,22 +36,37 @@ router.post("/", uploader.single("image"), function(req, res) {
 		});
 })
 
+
+
 router.get("/description", function(req, res) {
-	res.render("description");
+	res.render("description")
 })
 
-
-
-
-// router.post("/description", function(req,res){
-// 		user.updateFile({
-// 			description: req.body.description,
-// 		}).then(function(){
-// 			res.redirect("/description/gram")
-// 		})
-// })
-			
+router.post("/description", function(req, res) {
 	
+			console.log(req.file.description, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
+			description: req.file.description
+			res.redirect("/form/gram")
+		})
+
+	//console.log(req.fileId, files, "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd")
+	//Files.findOne({ where: { description: req.body.description } })
+  //.then(function (description) {
+    // Check if record exists in db
+  // console.log(description, req.body.description, "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+    //if (description) {
+   //   Files.updateFiles({
+     //   description: req.body.description,
+     
+      
+  //  }
+  //})
+   
+
+
+//})
+
+
 
 //Render an individual document
 router.get("/gram/:fileId", function(req, res) {

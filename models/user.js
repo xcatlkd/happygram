@@ -44,7 +44,7 @@ User.prototype.upload = function(file) {
 				size: file.size,
 				originalName: file.originalname,
 				mimeType: file.mimetype,
-				description: "",
+				//description: file.description,
 			})
 			.then(function() {
 				const ext = path.extname(file.originalname);
@@ -65,6 +65,51 @@ User.prototype.upload = function(file) {
 
 					})
 				}		
+
+	User.prototype.description = function(req) {
+	      Files.updateFile({
+//         description: "",
+       
+       description: file.description,
+
+})
+}
+// console.log(description,"ggggggggggggggggg")
+// 				// id: file.filename,
+// 				// size: file.size,
+// 				// originalName: file.originalname,
+// 				// mimeType: file.mimetype,
+				
+// 			.then(function(description){
+// 	     User.findOne({ where:	{
+// 	 	     fileId: file.description,
+// 	   }
+	 // }).then(function(description){
+		// 		 User.updateFile({
+//         description: "",
+//       })
+				// id: file.filename,
+				// size: file.size,
+				// originalName: file.originalname,
+				// mimeType: file.mimetype,
+				
+// 			})
+// })
+
+
+
+
+//update description
+// User.findById({ where: { fileId: req.description  } })
+//   .then(function (file) {
+//     // Check if record exists in db
+//     if (file) {
+//       User.updateFile({
+//         description: "",
+//       })
+//       .success(function () {})
+//     }
+   
 
 // additional user functionality
 
