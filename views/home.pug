@@ -2,5 +2,20 @@ include layout.pug
 	title Home
 include usernav.pug
 h1 This is the "Home" page.
-	p #{user.username}
-	p #{user.id}
+	if (user) 
+		p #{user.username}
+		p #{user.id}
+		if (data)
+			for files in data
+				img.image(src=`../files/${files.id}.jpg`)
+				h3.username 
+					a(href=`/user/${user.username}`) #{user.username}
+				p.description #{files.description}
+				//- if (files.userId !== user.id)
+				form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
+					button Like
+
+	if (error) 
+		p #{error}
+
+script(src="scripts/likeValid.js")

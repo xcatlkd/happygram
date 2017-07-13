@@ -31,6 +31,19 @@ const Files = sql.define("file", {
 	},
 });
 
+// Files.prototype.like = function(fileid) {
+// 	return this.createLike({
+// 		fileid: fileid,
+// 	})
+// 	.then(function(like) {
+// 		if (like) {
+// 			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
+// 		}
+// 		else {
+// 			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
+// 		}
+// 	})
+// };
 
 
 Files.hasMany(Comments);

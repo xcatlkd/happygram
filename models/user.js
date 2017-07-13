@@ -124,6 +124,21 @@ User.prototype.login = function(req) {
 };
 
 
+User.prototype.like = function(fileid) {
+	return this.createLike({
+		fileid: fileid,
+	})
+	.then(function(like) {
+		if (like) {
+			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
+		}
+		else {
+			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
+		}
+	})
+};
+
+
 // define table relations
 
 
