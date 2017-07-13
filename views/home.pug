@@ -11,6 +11,8 @@ h1 This is the "Home" page.
 				h3.username 
 					a(href=`/user/${user.username}`) #{user.username}
 				p.description #{files.description}
+				form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
+					button Like
 
 	if (error) 
 		p #{error}

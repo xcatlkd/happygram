@@ -78,12 +78,20 @@ router.get("/gram", function(req, res) {
 		console.log(file, "9999999999999999999999999999999999999999999999999999999999999999999999999999999999")
 		res.render("gram", { 
 			files: file,
-			
+
 		});
 	});
 });
 		
+// Sample routes for displaying user & file content
+// test route for creating a like for a photo
 
+router.post("/like/:fileid", function(req, res) {
+	req.user.like(req.params.fileid)
+	.then(function(like) {
+		res.redirect("../user/home");
+	})
+})
 
 
 // Download a document, if it exists
