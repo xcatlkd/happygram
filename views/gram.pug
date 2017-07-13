@@ -1,6 +1,11 @@
+include layout.pug
+	title Images
+include usernav.pug
 h1.dest Welcome to Sami-gram!	
 	br
 	for user in files
 		img.image(src=`../files/${user.id}.jpg`)
+		h3.username #{user.userId}
 		p.description #{user.description}
+
 		
