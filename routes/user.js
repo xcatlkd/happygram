@@ -6,6 +6,7 @@ const router = express.Router();
 // database configurations  #############################
 
 const User = require('../models/user');
+const Files = require('../models/file');
 
 // Photo model should have a method for requesting all comments and like
 // so no need to import those models explicitly..
@@ -20,8 +21,13 @@ const userAuthMW = require('../middleware/userAuthMW');
 // routes  #############################################
 
 router.get('/home', function(req, res) {
-	console.log("******************   '/user/home'    ****************************** req.session: ", req.session);
-	res.render("home", { user: req.user });
+	Files.findAll({ where: {
+		userId: req.user.id,
+	}})
+	.then(function(data) {
+		console.log("******************   '/user/home'    ******************* data: ", data, " req.user: ", req.user);
+		res.render("home", { user: req.user, data: data });
+	})
 });
 
 router.get('/logout', function(req, res) {
@@ -29,20 +35,27 @@ router.get('/logout', function(req, res) {
 	res.redirect('../');
 });
 
-router.get('/:userId', function(req, res) {
+router.get('/:username', function(req, res) {
 	User.findOne({ where: {
-		id: req.params.userId,
+		username: req.params.username,
 	}
 	})
 	.then(function(user) {
 		if (user) {
-			console.log(user);
-			res.render("home", { user: user }) ;
+			return user;	
 		}
 		else {
 			res.render("home", { error: "No such user"});
-			console.log("No such user");
 		}
+	})
+	.then(function(user) {
+		Files.findAll({ where: {
+			userId: user.id,
+		}})
+		.then(function(data) {
+			console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
+			res.render("home", { user: user, data: data });
+		})
 	})
 	.catch(function(err) {
 		console.error(err);

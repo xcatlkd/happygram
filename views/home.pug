@@ -5,6 +5,12 @@ h1 This is the "Home" page.
 	if (user) 
 		p #{user.username}
 		p #{user.id}
+		if (data)
+			for files in data
+				img.image(src=`../files/${files.id}.jpg`)
+				h3.username 
+					a(href=`/user/${user.username}`) #{user.username}
+				p.description #{files.description}
+
 	if (error) 
 		p #{error}
-		
