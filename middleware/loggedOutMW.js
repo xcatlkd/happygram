@@ -6,7 +6,10 @@ const checkLoggedOut = function(req, res, next) {
 		console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  loggedOutMW %%%%%%%%%%%%%%%%  :")
 		next();
 	} else {
+
 		console.log("$$$$$$$$$$$$$$$$ loggedOutMW $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:  req.session.userid: ", req.session.userid);		
+
+
 		res.redirect('/user/home');
 	}
 }

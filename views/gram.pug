@@ -9,4 +9,26 @@ h1.dest Welcome to Sami-gram!
 			a(href=`/user/${user.userId}`) #{user.userId}
 		p.description #{user.description}
 
+h1.dest Welcome to Happy-Gram!	
+	br
+	.navbar.container
+	.navbar-ul
+		ul.navbar
+			li
+				a(href="/user/home") Home
+			li
+				a(href="/signup") Signup
+			li
+				a(href="/user/logout") Logout
+
+	for user in files
+		img.image(src=`/files/${user.id}.jpg`)
+		p.description #{user.description}
+			li
+				a(href=`/form/${user.id}/description`) Description
+
+		//-img.image(src=`../files/${user.id}.jpg`)
+
+
+
 		

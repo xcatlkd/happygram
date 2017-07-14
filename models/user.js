@@ -38,28 +38,30 @@ const User = sql.define('user', {
 });
 
 
-User.prototype.upload = function(file) {
+User.prototype.upload = function(file, body) {
 		return this.createFile({
 				id: file.filename,
 				size: file.size,
 				originalName: file.originalname,
 				mimeType: file.mimetype,
-				description: "",
+				description: body.description,
 			})
-			.then(function() {
+			.then(function(data) {
 				const ext = path.extname(file.originalname);
 				const dest = "assets/files/" + file.filename + ext;
-				return fs.copy(file.path, dest);
+				fs.copy(file.path, dest);
+				return data
 			})
-			.then(function() {
-					// If I'm an image, we should generate thumbnail
+			.then(function(data) {
+					// If I'm an image
 					
 					if (file.mimetype.includes("image/")) {
-						Jimp.read(file.path).then(function(img) {
+						return Jimp.read(file.path).then(function(img) {
 							img.quality(90);
 							img.resize(Jimp.AUTO, 400);
 							// img.create(file.filename);
-							return img.write("assets/files/" + file.filename + ".jpg");
+							img.write("assets/files/" + file.filename + ".jpg");
+							return data
 						})
 					}
 
