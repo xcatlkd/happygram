@@ -127,6 +127,7 @@ User.prototype.login = function(req) {
 User.prototype.like = function(fileid) {
 	return this.createLike({
 		fileid: fileid,
+		liked: true,
 	})
 	.then(function(like) {
 		if (like) {

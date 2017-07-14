@@ -20,7 +20,9 @@ const userAuthMW = require('../middleware/userAuthMW');
 
 // routes  #############################################
 
+
 router.get('/home', function(req, res) {
+// add a logged in check to the user/home route to redirect to app/home or user page
 	Files.findAll({ where: {
 		userId: req.user.id,
 	}})
@@ -54,7 +56,7 @@ router.get('/:username', function(req, res) {
 		}})
 		.then(function(data) {
 			// console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
-			res.render("home", { user: user, data: data });
+			res.render("home", { thisUser: user, data: data, user: req.user });
 		})
 	})
 	.catch(function(err) {
