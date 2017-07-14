@@ -7,7 +7,47 @@ body#signup .hidden {
 	display: none;
 }*/
 
-.form-error {
+/* ###############################################################
+  Nav bar 
+################################################################ */
+
+div.form-error {
 	color: red;
 	font-size: 16px;
+}
+
+.navbar li {
+	width: 135px;
+	height: 55px;
+	display: inline-block;
+	border: 1px solid grey;
+	border-radius: 5px;
+	margin: 10px 25px;
+	text-align: center;
+}
+
+.navbar {
+	height: 100px;
+	width: 100%;
+	background-color: #ddd;
+}
+
+/* ###############################################################
+	User auth forms 
+################################################################ */
+
+.form-container {
+	width: 75%;
+	margin: 10px auto;
+	border: 1px solid grey;
+	border-radius: 5px;
+	font-size: 2em;
+}
+
+.form-container form {
+	margin: 10px auto;
+}
+
+.hidden {
+	display: none;
 }

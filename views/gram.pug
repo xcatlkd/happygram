@@ -1,8 +1,22 @@
-h1.dest Welcome to Happy Gram!		
-	
+h1.dest Welcome to Happy-Gram!	
+	br
+	.navbar.container
+	.navbar-ul
+		ul.navbar
+			li
+				a(href="/user/home") Home
+			li
+				a(href="/signup") Signup
+			li
+				a(href="/user/logout") Logout
+
 	for user in files
-		h3.photo #{user.id}
+		img.image(src=`/files/${user.id}.jpg`)
 		p.description #{user.description}
-		img.image(src=`../files/${user.id}.jpg`)
+			li
+				a(href=`/form/${user.id}/description`) Description
+
+		//-img.image(src=`../files/${user.id}.jpg`)
+
 
 		

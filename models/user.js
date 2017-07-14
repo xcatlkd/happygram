@@ -38,78 +38,35 @@ const User = sql.define('user', {
 });
 
 
-User.prototype.upload = function(file) {
+User.prototype.upload = function(file, body) {
 		return this.createFile({
 				id: file.filename,
 				size: file.size,
 				originalName: file.originalname,
 				mimeType: file.mimetype,
-				//description: file.description,
+				description: body.description,
 			})
-			.then(function() {
+			.then(function(data) {
 				const ext = path.extname(file.originalname);
 				const dest = "assets/files/" + file.filename + ext;
-				return fs.copy(file.path, dest);
+				fs.copy(file.path, dest);
+				return data
 			})
-			.then(function() {
-					// If I'm an image, we should generate thumbnail
+			.then(function(data) {
+					// If I'm an image
 					
 					if (file.mimetype.includes("image/")) {
-						Jimp.read(file.path).then(function(img) {
+						return Jimp.read(file.path).then(function(img) {
 							img.quality(90);
 							img.resize(Jimp.AUTO, 400);
 							// img.create(file.filename);
-							return img.write("assets/files/" + file.filename + ".jpg");
+							img.write("assets/files/" + file.filename + ".jpg");
+							return data
 						})
 					}
 
 					})
 				}		
-
-	User.prototype.description = function(req) {
-	      Files.updateFile({
-//         description: "",
-       
-       description: file.description,
-
-})
-}
-// console.log(description,"ggggggggggggggggg")
-// 				// id: file.filename,
-// 				// size: file.size,
-// 				// originalName: file.originalname,
-// 				// mimeType: file.mimetype,
-				
-// 			.then(function(description){
-// 	     User.findOne({ where:	{
-// 	 	     fileId: file.description,
-// 	   }
-	 // }).then(function(description){
-		// 		 User.updateFile({
-//         description: "",
-//       })
-				// id: file.filename,
-				// size: file.size,
-				// originalName: file.originalname,
-				// mimeType: file.mimetype,
-				
-// 			})
-// })
-
-
-
-
-//update description
-// User.findById({ where: { fileId: req.description  } })
-//   .then(function (file) {
-//     // Check if record exists in db
-//     if (file) {
-//       User.updateFile({
-//         description: "",
-//       })
-//       .success(function () {})
-//     }
-   
 
 // additional user functionality
 
@@ -126,7 +83,7 @@ function hashUserPassword(user) {
 };
 
 User.prototype.comparePassword = function(password) {
-	return bcrypt.compare(pw, this.get("password"));
+	return bcrypt.compare(password, this.get("password"));
 };
 
 
@@ -137,7 +94,6 @@ User.signup = function(req) {
 		isActive: true,
 	})
 	.then(function(user) {
-		console.log("^^^^^^^^^^^^^^^^^^^^^^   user model; signup    ^^^^^^^^^^^^^^^^^^^^^^^^^^  req.session.userid:  ", req.session.userid);
 		return user;
 	})
 };
@@ -152,7 +108,7 @@ User.prototype.login = function(req) {
 				if (valid) {
 					req.session.userid = user.get("id");
 					req.session.save(function(err) {
-						res.redirect("user/" + user.get("id"));
+						res.redirect("/user/home");
 					})
 				}
 				else {

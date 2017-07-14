@@ -23,10 +23,11 @@ router.post("/", uploader.single("image"), function(req, res) {
 			error: "You must choose a file to upload",
 		})
 	}
-	
 	//Otherwise, try an upload
-	 req.user.upload(req.file).then(function() {
-			res.redirect("/form/description")
+	req.user.upload(req.file, req.body).then(function(data) {
+			// res.json(data)
+			console.log(data, "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+			res.redirect("/form/" + data.id + "/description")
 		})
 		.catch(function(err) {
 			console.error("Something went wrong with upload", err);
@@ -35,68 +36,60 @@ router.post("/", uploader.single("image"), function(req, res) {
 			});
 		});
 })
-
-
-
-router.get("/description", function(req, res) {
+			
+router.get("/:id/description", function(req, res) {
 	res.render("description")
 })
 
-router.post("/description", function(req, res) {
-	
-			console.log(req.file.description, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
-			description: req.file.description
+router.post("/:id/description", function(req, res) {
+	Files.findOne({
+			where: {
+				id: req.params.id
+			}
+		}).then(function(file) {
+			file.update({
+				description: req.body.description
+			})
 			res.redirect("/form/gram")
+		}).catch(function(err) {
+			console.error("Something went wrong with upload", err);
 		})
-
-	//console.log(req.fileId, files, "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd")
-	//Files.findOne({ where: { description: req.body.description } })
-  //.then(function (description) {
-    // Check if record exists in db
-  // console.log(description, req.body.description, "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
-    //if (description) {
-   //   Files.updateFiles({
-     //   description: req.body.description,
-     
-      
-  //  }
-  //})
-   
-
-
-//})
-
+		//description: req.body.description
+})
 
 
 //Render an individual document
-router.get("/gram/:fileId", function(req, res) {
-	Files.findById(req.params.fileId).then(function(file) {
-			console.log(file, ")))))))))))))))))))))))))))))))((((((((((((")
-			if (file) {
-				res.render(file.get("id"), "gram", {
-					files: file,
-				});
-			} else {
-				res.status(404);
-				res.render("Not Found", "404");
-			}console.log(file, ")))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((")
-		})
-		.catch(function(err) {
-			console.error("Error while fetching file " + req.params.fileId, err);
-			res.status(500).send("Something went wrong!")
-		});
-});
+// router.get("/gram/:fileId", function(req, res) {
+// 	Files.findById(req.params.fileId).then(function(file) {
+// 			console.log(file, ")))))))))))))))))))))))))))))))((((((((((((")
+// 			if (file) {
+// 				res.render(file.get("id"), "gram", {
+// 					files: file,
+// 				});
+// 			} else {
+// 				res.status(404);
+// 				res.render("Not Found", "404");
+// 			}console.log(file, ")))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((")
+// 		})
+// 		.catch(function(err) {
+// 			console.error("Error while fetching file " + req.params.fileId, err);
+// 			res.status(500).send("Something went wrong!")
+// 		});
+// });
 
 router.get("/gram", function(req, res) {
-	Files.findAll({ order: [['createdAt', 'DESC']] }).then(function(file) {
+	Files.findAll({
+		order: [
+			['createdAt', 'DESC']
+		]
+	}).then(function(file) {
 		console.log(file, "999999999999999999999999999999999999999999")
-		res.render("gram", { 
+		res.render("gram", {
 			files: file,
-			
+
 		});
 	});
 });
-		
 
 
 
@@ -118,3 +111,5 @@ router.get("/gram", function(req, res) {
 
 
 module.exports = router;
+
+
