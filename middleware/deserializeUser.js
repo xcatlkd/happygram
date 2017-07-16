@@ -4,7 +4,7 @@ function deserializeUser(req, res, next) {
 	if (req.session) {
 		User.findById(req.session.userid) 
 		.then(function(user) {
-			console.log("#########################   deserializeUser   ################################", user);
+			//console.log("#########################   deserializeUser   ################################", user);
 			if (user) {
 				req.user = user;
 			} else {
@@ -18,7 +18,7 @@ function deserializeUser(req, res, next) {
 			next();
 		});
 	} else {
-		console.log("%%%%%%%%%%%%%%%%%%%%%%%  deserializeUser: no req.session.userid  %%%%%%%%%%%%%% ", req.session);
+		//console.log("%%%%%%%%%%%%%%%%%%%%%%%  deserializeUser: no req.session.userid  %%%%%%%%%%%%%% ", req.session);
 		next();
 	}
 }

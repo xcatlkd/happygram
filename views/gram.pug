@@ -6,16 +6,22 @@ h1.dest Welcome to Happy-Gram!
 			li
 				a(href="/user/home") Home
 			li
+				a(href="/form") Form
+			li
 				a(href="/signup") Signup
 			li
 				a(href="/user/logout") Logout
 
-	for user in files
-		img.image(src=`/files/${user.id}.jpg`)
-		p.description #{user.description}
+	for file in files
+		img.image(src=`/files/${file.id}.jpg`)
+		p.description #{file.description}
 			li
-				a(href=`/form/${user.id}/description`) Description
-
+				a(href=`/form/${file.id}/description`) Description
+				form(class="home-form", method="post", action="/form/comment")
+					input(name="comment",  type="text", placeholder="Comment")
+					input(name="fileId",  type="hidden", value=`${file.get("id")}`)
+					button.add-btn Add
+				p.comment #{file.text}
 		//-img.image(src=`../files/${user.id}.jpg`)
 
 
