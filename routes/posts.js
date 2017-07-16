@@ -90,9 +90,9 @@ router.post("/like/:fileid", function(req, res) {
 	console.log(req.params.fileid);
 	Files.findById(req.params.fileid)
 	.then(function(file) {
-		if (file && file.userid !== req.user.id) {
+		if (file && req.user && file.userid !== req.user.id) {
 
-			req.user.like(req.params.fileid)
+			file.like(req.user.id)
 			.then(function(like) {
 				res.redirect("../../form/gram");
 			})

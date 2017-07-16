@@ -12,7 +12,8 @@ h1 This is the "Home" page.
 					h3.username 
 						a(href=`/user/${thisUser.username}`) #{thisUser.username}
 				p.description #{files.description}
-				if (files.userId !== user.id)
+				//- only display like button if a user is signed in and not on their own files
+				if (user && files.userId !== user.id)
 					form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
 						button Like
 			//-		
@@ -22,10 +23,11 @@ h1 This is the "Home" page.
 
 	if (error) 
 		p #{error}
-script.
-	var userId = "#{user.id}"
-	var fileUserId = "#{data.userId}"
-	var username = "#{user.username}"
-	var dataObj	= "#{data}"
+
+//- script.
+//- 	var userId = "#{thisUser.id}"
+//- 	var fileUserId = "#{data.userId}"
+//- 	var username = "#{thisUser.username}"
+//- 	var dataObj	= "#{data}"
 
 script(src="../scripts/likeValid.js")

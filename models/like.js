@@ -11,7 +11,7 @@ module.exports = sql.define('like', {
 		type: Sequelize.BOOLEAN,
 	},
 	fileid: { 
-		type: Sequelize.INTEGER,
+		type: Sequelize.STRING,
 	},
 	userid: {
 		type: Sequelize.INTEGER,

@@ -28,7 +28,7 @@ router.get('/home', function(req, res) {
 	}})
 	.then(function(data) {
 		// console.log("******************   '/user/home'    ******************* data: ", data, " req.user: ", req.user);
-		res.render("home", { user: req.user, data: data });
+		res.render("home", { thisUser: req.user, user: req.user, data: data });
 	})
 });
 
