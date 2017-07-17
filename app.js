@@ -17,6 +17,7 @@ const SessionStore = connectSessionSequelize(session.Store);
 // .env configuration variables #################################
 
 const port = process.env.PORT || 8080;
+const server_host = process.env.HOST || '0.0.0.0';
 const cookieSecret = process.env.COOKIE_SECRET || "don";
 
 // App - wide configurations ####################################
@@ -52,7 +53,7 @@ app.use("/form", postsRoutes);
 // Sync db and launch server #####################################
 
 sql.sync().then(function() {
-	app.listen(port, function(){
+	app.listen(port, server_host, function(){
 		console.log("Server up on port " + port);
 	});
 });

@@ -1,10 +1,12 @@
 const User = require('../models/user');
 
 function deserializeUser(req, res, next) {
-	if (req.session) {
+	if (req.session.userid) {
 		User.findById(req.session.userid) 
 		.then(function(user) {
+
 			//console.log("#########################   deserializeUser   ################################", user);
+			
 			if (user) {
 				req.user = user;
 			} else {

@@ -52,6 +52,19 @@ router.post("/:id/description", function(req, res) {
 		}).then(function() {
 
 			res.redirect("/form/gram/");
+
+//Render an individual document
+router.get("/gram/:fileId", function(req, res) {
+	Files.findById(req.params.fileId).then(function(file) {
+			// console.log(file, ")))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((")
+			if (file) {
+				res.render(file.get("id"), "gram", {
+					files: file,
+				});
+			} else {
+				res.status(404);
+				res.render("Not Found", "404");
+			} // console.log(file, ")))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((");
 		})
 
 	}).catch(function(err) {
@@ -60,6 +73,7 @@ router.post("/:id/description", function(req, res) {
 	});
 	//description: req.body.description
 });
+
 
 
 router.post("/comment", function(req, res) {
@@ -95,6 +109,38 @@ router.get("/gram", function(req, res) {
 
 			// 		});
 		});
+
+router.get("/gram", function(req, res) {
+	Files.findAll({ order: [['createdAt', 'DESC']] }).then(function(file) {
+		// console.log(file, "9999999999999999999999999999999999999999999999999999999999999999999999999999999999")
+		res.render("gram", { 
+			files: file,
+
+		});
+	});
+});
+		
+// Sample routes for displaying user & file content
+// test route for creating a like for a photo
+
+router.post("/like/:fileid", function(req, res) {
+	console.log(req.params.fileid);
+	Files.findById(req.params.fileid)
+	.then(function(file) {
+		if (file && file.userid !== req.user.id) {
+
+			req.user.like(req.params.fileid)
+			.then(function(like) {
+				res.redirect("../../form/gram");
+			})
+			.catch(function(err) {
+				console.error(err);
+			})
+			
+		}
+	})
+})
+
 
 	});
 });

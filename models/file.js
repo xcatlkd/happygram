@@ -34,10 +34,30 @@ const Files = sql.define("file", {
 		notNull: true,
 	},
 });
+
 	
 // create the relations between comments and likes here
 
-						Files.hasMany(Comments);
-						Files.hasMany(Likes);
+
+// Files.prototype.like = function(fileid) {
+// 	return this.createLike({
+// 		fileid: fileid,
+// 	})
+// 	.then(function(like) {
+// 		if (like) {
+// 			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
+// 		}
+// 		else {
+// 			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
+// 		}
+// 	})
+// };
+
+
+Files.hasMany(Comments);
+Files.hasMany(Likes);
+
+// create the relations between comments and likes here
+
 
 module.exports = Files;

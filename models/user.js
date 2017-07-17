@@ -90,6 +90,7 @@ User.prototype.comparePassword = function(password) {
 
 User.signup = function(req) {
 	return User.create({
+
 			username: req.body.username,
 			password: req.body.password,
 			isActive: true,
@@ -116,6 +117,27 @@ User.prototype.login = function(req) {
 						} else {
 							console.error("bad password");
 						}
+		username: req.body.username,
+		password: req.body.password,
+		isActive: true,
+	})
+	.then(function(user) {
+		return user;
+	})
+};
+
+User.prototype.login = function(req) {
+	User.findOne({ where:	{
+		username: req.body.username,
+	}})
+	.then(function(user) {
+		if (user) {
+			user.comparePassword(req.body.password).then(function(valid) {
+				if (valid) {
+					req.session.userid = user.get("id");
+					req.session.save(function(err) {
+						res.redirect("/user/home");
+
 					})
 					.catch(function(err) {
 						console.error(err);
@@ -139,6 +161,21 @@ User.prototype.like = function(fileid) {
 				console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
 			}
 		})
+};
+
+
+User.prototype.like = function(fileid) {
+	return this.createLike({
+		fileid: fileid,
+	})
+	.then(function(like) {
+		if (like) {
+			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
+		}
+		else {
+			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
+		}
+	})
 };
 
 

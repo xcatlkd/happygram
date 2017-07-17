@@ -1,3 +1,4 @@
+
 h1.dest Welcome to Happy-Gram!	
 	br
 	.navbar.container
@@ -29,6 +30,17 @@ h1.dest Welcome to Happy-Gram!
 						button.add-btn Add			
 						//- input(type="submit" value="OK")
 		//- img.image(src=`../files/${user.id}.jpg`)
+
+include layout.pug
+	title Images
+include usernav.pug
+h1.dest Welcome to Sami-gram!	
+	br
+	for user in files
+		img.image(src=`../files/${user.id}.jpg`)
+		h3.username 
+			a(href=`/user/${user.userId}`) #{user.userId}
+		p.description #{user.description}
 
 
 	//- form(class="home-form", method="post", action="/form/gram")

@@ -23,12 +23,18 @@ const File = require('../models/file');
 const loggedOutMW = require('../middleware/loggedOutMW');
 
 // router.use(sessionMW);
-//router.use(loggedOutMW);
+// router.use(loggedOutMW);
 
 // routes  #############################################
 
 router.get('/', function(req, res) {
-	res.render("layout", { page: "home" });
+	File.findAll({ where: {
+		userId: 3,
+	}})
+	.then(function(file) {
+		console.log(file);
+		res.render("landing", { data: file });
+	})
 });
 
 router.get('/signup', function(req, res) {
