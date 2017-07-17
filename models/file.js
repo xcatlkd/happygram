@@ -36,8 +36,8 @@ const Files = sql.define("file", {
 });
 	
 // create the relations between comments and likes here
+
 						Files.hasMany(Comments);
 						Files.hasMany(Likes);
-
 
 module.exports = Files;

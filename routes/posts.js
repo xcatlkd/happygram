@@ -62,38 +62,108 @@ router.post("/:id/description", function(req, res) {
 });
 
 
-router.post("/comment", function(req,res) {
-    if (!req.body.fileId || !req.body.comment) {
-        return res.status(500).send("Missing required comment field");
-    }
-    Files.findById(req.body.fileId).then(function(file) {
-        if (file) {
-            file.createComment({
-                text: req.body.comment,
-            })
-            .then(function() {
-                res.redirect("/form/gram/");
-            });
-        }
-        else {
-            res.render(res, "404");
-        }
-    });
-});
-
-
-router.get("/gram", function(req, res) {
-	Files.findAll({
-		order: [
-			['createdAt', 'DESC']
-		]
-	}).then(function(file) {
-		//console.log(file, "999999999999999999999999999999999999999999")
-		res.render("gram", {
-			files: file,
-
-		});
+router.post("/comment", function(req, res) {
+	if (!req.body.fileId || !req.body.comment) {
+		return res.status(500).send("Missing required comment field");
+	}
+	Files.findById(req.body.fileId).then(function(file) {
+		//console.log(req.session.userid, "gggggggggggggggggggggg")
+		if (file) {
+			file.createComment({
+					text: req.body.comment,
+					userId: req.session.userid,
+				})
+				// .then(function(comment) {
+				//     req.user.addComment({
+				//     	userId: userId,
+				//     })
+			res.redirect("/form/gram");
+			// });
+		} else {
+			res.render(res, "404");
+		}
 	});
 });
 
-module.exports = router;
+router.get("/gram", function(req, res) {
+	Files.findAll({
+		include: [Comment]
+	}).then(function(files) {
+		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.\n', JSON.stringify(files), '\n>>>>>>>>>>>>>>>>>>>>>>>>>>\n')
+		res.render("gram", {
+			files: files,
+
+			// 		});
+		});
+
+	});
+});
+
+router.post("/delete", function(req, res) {
+	Files.findById(req.body.fileId).then(function(file) {
+		//console.log(req.body.field, "gggggggggggggggggggggg")
+
+		if (file) {
+
+			file.destroy({
+				fileId: req.body.fileId,
+			  id: req.body.id
+			})
+			res.redirect("/form/gram")
+		}
+	});
+});
+
+// router.post("/comment", function(req, res) {
+// 			Files.findById(req.body.fileId).then(function(file) {
+// 				//console.log(req.body.field, "gggggggggggggggggggggg")
+// 				if (!req.body.fileId || !req.body.comment) {
+// 					return res.status(500).send("Missing required comment field");
+// 				}
+// 				if (req.body.btn == "add") {
+// 					Files.findById(req.body.fileId).then(function(file) {
+// 						//console.log(req.session.userid, "gggggggggggggggggggggg")
+// 						if (file) {
+// 							file.createComment({
+// 									text: req.body.comment,
+// 									userId: req.session.userid,
+// 								})
+// 								// .then(function(comment) {
+// 								//     req.user.addComment({
+// 								//     	userId: userId,
+// 								//     })
+// 							res.redirect("/form/gram/");
+// 							// });
+// 						} else {
+// 							res.render(res, "404");
+// 						}
+
+// 					})
+// 				} else {
+// 					Files.findById(req.body.fileId).then(function(file) {
+// 						if (file) {
+
+// 							file.destroy({
+// 								fileId: req.body.fileId
+// 							})
+// 							res.render("gram")
+// 						}
+// 					})
+// 				}
+// 			})
+// })
+			// router.get("/gram", function(req, res) {
+			// 	Files.findAll({
+			// 		order: [
+			// 			['createdAt', 'DESC']
+			// 		]
+			// 	}).then(function(file) 
+			// 		//console.log(file, "999999999999999999999999999999999999999999")
+			// 		res.render("gram", {
+			// 			files: file,
+
+			// 		});
+			// 	});
+			// });
+
+			module.exports = router;

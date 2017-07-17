@@ -69,20 +69,7 @@ User.prototype.upload = function(file, body) {
 		})
 }
 
-// User.prototype.comment = function(fileid) {
-// 	return this.createComment({
-// 			fileid: fileid,
-// 		})
-// 		.then(function(fileid) {
-// 			if (comment) {
-// 				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.comment $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
-// 			} else {
-// 				console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.comment ::::::::::::::::::::::::::::::( no likey");
-// 			}
-// 		})
-// };
-
-// additional user functionality
+//additional user functionality
 
 function hashUserPassword(user) {
 	if (user.password) {
