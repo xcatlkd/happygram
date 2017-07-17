@@ -31,9 +31,8 @@ router.get('/', function(req, res) {
 	File.findAll({ where: {
 		userId: 3,
 	}})
-	.then(function(file) {
-		console.log(file);
-		res.render("landing", { data: file });
+	.then(function(data) {
+		res.render("landing", { data: data });
 	})
 });
 

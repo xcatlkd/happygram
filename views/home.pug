@@ -2,20 +2,35 @@ include layout.pug
 	title Home
 include usernav.pug
 h1 This is the "Home" page.
-	if (user) 
-		p #{user.username}
-		p #{user.id}
+	if (thisUser) 
+		p.js-username #{thisUser.username}
 		if (data)
 			for files in data
-				img.image(src=`../files/${files.id}.jpg`)
-				h3.username 
-					a(href=`/user/${user.username}`) #{user.username}
-				p.description #{files.description}
-				//- if (files.userId !== user.id)
-				form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
-					button Like
+				.post-obj-conatiner
+					.img-container
+						img.landing-image(src=`../files/${files.id}.jpg`)
+						h3.username 
+							a(href=`/user/${thisUser.username}`) #{thisUser.username}
+						//- only display like button if a user is signed in and not on their own files
+						if (user && files.userId !== user.id)
+							.like-img-form
+								form.like-box(method="POST", action=`/form/like/${files.id}`, value=`${files.id}`)
+									button
+										img.like-img-src(src="/images/unliked.png")
+					.desc-container
+						p.description #{files.description}
+			//-		
+				if (files.userId === user.id) 
+					form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
+						button Like
 
 	if (error) 
 		p #{error}
 
-script(src="scripts/likeValid.js")
+//- script.
+//- 	var userId = "#{thisUser.id}"
+//- 	var fileUserId = "#{data.userId}"
+//- 	var username = "#{thisUser.username}"
+//- 	var dataObj	= "#{data}"
+
+script(src="../scripts/likeValid.js")

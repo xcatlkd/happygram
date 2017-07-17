@@ -51,11 +51,15 @@ div.form-error {
 
 }
 
-
-	Landing page 
+/* ###############################################################
+	Images
+################################################################ */
 
 .landing-title {
 	text-align: center;
+}
+.post-obj-container {
+	position: relative;
 }
 .img-container {
 	width: 65%;
@@ -67,4 +71,19 @@ div.form-error {
 .img-container img {
 	width: 100%;
 	margin: 5px auto;
+
+
+}
+
+/* ###############################################################
+	Like button 
+################################################################ */
+.like-img-form {
+	/*background-image: url("../images/unliked.png");*/
+/*	background-repeat: no-repeat;
+	background-position: cover;
+*/	width: 75px;
+	height: 75px;
+
+	/*position: absolute;*/
 }

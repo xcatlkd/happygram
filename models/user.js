@@ -165,15 +165,17 @@ User.prototype.like = function(fileid) {
 
 
 User.prototype.like = function(fileid) {
-	return this.createLike({
+	return Likes.upsert({
+		userid: this.id,
 		fileid: fileid,
+		liked: true,  	// will need to eventually change this to a value from the page in order to toggle liked / unliked
 	})
-	.then(function(like) {
-		if (like) {
-			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
+	.then(function(test) {
+		if (test) {
+			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: updated ", test);
 		}
 		else {
-			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
+			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::: created");
 		}
 	})
 };

@@ -35,23 +35,22 @@ const Files = sql.define("file", {
 	},
 });
 
-	
-// create the relations between comments and likes here
 
-
-// Files.prototype.like = function(fileid) {
-// 	return this.createLike({
-// 		fileid: fileid,
-// 	})
-// 	.then(function(like) {
-// 		if (like) {
-// 			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
-// 		}
-// 		else {
-// 			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
-// 		}
-// 	})
-// };
+Files.prototype.like = function(userid) {
+	return Likes.upsert({
+		userid: userid,
+		fileid: this.id,
+		liked: true,  	// will need to eventually change this to a value from the page in order to toggle liked / unliked
+	})
+	.then(function(test) {
+		if (test) {
+			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: updated ", test);
+		}
+		else {
+			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::: created");
+		}
+	})
+};
 
 
 Files.hasMany(Comments);

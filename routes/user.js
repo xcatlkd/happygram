@@ -16,20 +16,22 @@ const Files = require('../models/file');
 // middleware  #########################################
 
 
-=======
+
 const userAuthMW = require('../middleware/userAuthMW');
 // router.use(userAuthMW);
 
 
 // routes  #############################################
 
+
 router.get('/home', function(req, res) {
+// add a logged in check to the user/home route to redirect to app/home or user page
 	Files.findAll({ where: {
 		userId: req.user.id,
 	}})
 	.then(function(data) {
 		// console.log("******************   '/user/home'    ******************* data: ", data, " req.user: ", req.user);
-		res.render("home", { user: req.user, data: data });
+		res.render("home", { thisUser: req.user, user: req.user, data: data });
 	})
 });
 
@@ -46,7 +48,8 @@ router.get('/:userId', function(req, res) {
 router.post('/logout', function(req, res) {
 	req.session.destroy();
 	res.redirect('../');
-=======
+
+
 router.get('/:username', function(req, res) {
 	User.findOne({ where: {
 		username: req.params.username,
@@ -66,7 +69,7 @@ router.get('/:username', function(req, res) {
 		}})
 		.then(function(data) {
 			// console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
-			res.render("home", { user: user, data: data });
+			res.render("home", { thisUser: user, data: data, user: req.user });
 		})
 	})
 	.catch(function(err) {

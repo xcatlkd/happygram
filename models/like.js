@@ -9,5 +9,11 @@ module.exports = sql.define('like', {
 	},
 	liked: {
 		type: Sequelize.BOOLEAN,
-	}
+	},
+	fileid: { 
+		type: Sequelize.STRING,
+	},
+	userid: {
+		type: Sequelize.INTEGER,
+	},
 });
