@@ -4,7 +4,6 @@ include usernav.pug
 h1 This is the "Home" page.
 	if (thisUser) 
 		p.js-username #{thisUser.username}
-		//- p.js-userid.hidden #{user.id}
 		if (data)
 			for files in data
 				.post-obj-conatiner
@@ -15,9 +14,9 @@ h1 This is the "Home" page.
 						//- only display like button if a user is signed in and not on their own files
 						if (user && files.userId !== user.id)
 							.like-img-form
-								form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
+								form.like-box(method="POST", action=`/form/like/${files.id}`, value=`${files.id}`)
 									button
-										img.like-img-src(src="../images/unliked.png")
+										img.like-img-src(src="/images/unliked.png")
 					.desc-container
 						p.description #{files.description}
 			//-		

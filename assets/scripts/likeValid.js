@@ -18,7 +18,7 @@ $(document).ready(function() {
 	like.on("click", function(event) {
 		event.preventDefault();
 		console.log("Click", event.target);
-		$(event.target).attr("src", "../images/liked.png");
+		$(event.target).attr("src", "/images/liked.png");
 	});
 
 
