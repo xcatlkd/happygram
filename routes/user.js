@@ -15,8 +15,11 @@ const Files = require('../models/file');
 
 // middleware  #########################################
 
+
+=======
 const userAuthMW = require('../middleware/userAuthMW');
 // router.use(userAuthMW);
+
 
 // routes  #############################################
 
@@ -35,6 +38,15 @@ router.get('/logout', function(req, res) {
 	res.redirect('../');
 });
 
+
+router.get('/:userId', function(req, res) {
+	res.render("home", { user: req.user }) ;
+});
+
+router.post('/logout', function(req, res) {
+	req.session.destroy();
+	res.redirect('../');
+=======
 router.get('/:username', function(req, res) {
 	User.findOne({ where: {
 		username: req.params.username,
@@ -60,6 +72,7 @@ router.get('/:username', function(req, res) {
 	.catch(function(err) {
 		console.error(err);
 	})
+
 });
 
 module.exports = router;

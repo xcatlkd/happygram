@@ -1,11 +1,15 @@
 const sql = require('../util/sql');
 const Sequelize = require('sequelize');
 // import the comments and the likes models here
-const Users = require('./user');
+const User = require('./user');
 const Likes = require('./like');
 const Comments = require('./comment');
 const fs = require("fs-extra");
 const path = require("path");
+const multer = require("multer");
+const uploader = multer({
+	dest: "uploads/"
+});
 
 
 const Files = sql.define("file", {
@@ -31,6 +35,10 @@ const Files = sql.define("file", {
 	},
 });
 
+	
+// create the relations between comments and likes here
+
+
 // Files.prototype.like = function(fileid) {
 // 	return this.createLike({
 // 		fileid: fileid,
@@ -50,5 +58,6 @@ Files.hasMany(Comments);
 Files.hasMany(Likes);
 
 // create the relations between comments and likes here
+
 
 module.exports = Files;

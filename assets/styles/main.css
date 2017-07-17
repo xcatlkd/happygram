@@ -32,9 +32,6 @@ div.form-error {
 	background-color: #ddd;
 }
 
-/* ###############################################################
-	User auth forms 
-################################################################ */
 
 .form-container {
 	width: 75%;
@@ -50,11 +47,13 @@ div.form-error {
 
 .hidden {
 	display: none;
+
+
 }
 
-/* ###############################################################
+
 	Landing page 
-################################################################ */
+
 .landing-title {
 	text-align: center;
 }
@@ -68,5 +67,4 @@ div.form-error {
 .img-container img {
 	width: 100%;
 	margin: 5px auto;
-
 }
