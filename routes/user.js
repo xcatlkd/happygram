@@ -23,16 +23,15 @@ const userAuthMW = require('../middleware/userAuthMW');
 
 // routes  #############################################
 
+// add a logged in check to the user/home route to redirect to app/home or user page
 
 router.get('/home', function(req, res) {
-// add a logged in check to the user/home route to redirect to app/home or user page
 	Files.findAll({ where: {
 		userId: req.user.id,
 	}})
 	.then(function(data) {
-		// console.log("******************   '/user/home'    ******************* data: ", data, " req.user: ", req.user);
 		res.render("home", { thisUser: req.user, user: req.user, data: data });
-	})
+	});
 });
 
 router.get('/logout', function(req, res) {
@@ -45,16 +44,15 @@ router.get('/:userId', function(req, res) {
 	res.render("home", { user: req.user }) ;
 });
 
-router.post('/logout', function(req, res) {
-	req.session.destroy();
+router.get('/logout', function(req, res) {
+	req.session.userid = null;
 	res.redirect('../');
-
+});
 
 router.get('/:username', function(req, res) {
 	User.findOne({ where: {
 		username: req.params.username,
-	}
-	})
+	}})
 	.then(function(user) {
 		if (user) {
 			return user;	
@@ -66,16 +64,15 @@ router.get('/:username', function(req, res) {
 	.then(function(user) {
 		Files.findAll({ where: {
 			userId: user.id,
-		}})
-		.then(function(data) {
-			// console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
-			res.render("home", { thisUser: user, data: data, user: req.user });
-		})
+	}})
+	.then(function(data) {
+		// console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
+		res.render("home", { thisUser: user, data: data, user: req.user });
 	})
 	.catch(function(err) {
 		console.error(err);
 	})
-
+});
 });
 
 module.exports = router;
