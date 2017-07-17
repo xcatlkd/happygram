@@ -7,15 +7,19 @@ h1 This is the "Home" page.
 		//- p.js-userid.hidden #{user.id}
 		if (data)
 			for files in data
-				.img-container
-					img.landing-image(src=`../files/${files.id}.jpg`)
-					h3.username 
-						a(href=`/user/${thisUser.username}`) #{thisUser.username}
-				p.description #{files.description}
-				//- only display like button if a user is signed in and not on their own files
-				if (user && files.userId !== user.id)
-					form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
-						button Like
+				.post-obj-conatiner
+					.img-container
+						img.landing-image(src=`../files/${files.id}.jpg`)
+						h3.username 
+							a(href=`/user/${thisUser.username}`) #{thisUser.username}
+						//- only display like button if a user is signed in and not on their own files
+						if (user && files.userId !== user.id)
+							.like-img-form
+								form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
+									button
+										img.like-img-src(src="../images/unliked.png")
+					.desc-container
+						p.description #{files.description}
 			//-		
 				if (files.userId === user.id) 
 					form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
