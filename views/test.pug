@@ -1,0 +1,20 @@
+include layout.pug
+	title Test
+if message
+	h1 #{message}
+	if (data) 
+		for files in data
+			.post-obj-conatiner
+				.img-container
+					img.landing-image(src=`/files/${files.id}.jpg`)
+					h3.userId 
+						a(href=`/user/${files.userId}`) #{files.userId}
+					//- only display like button if a user is signed in and not on their own files
+					if (user && files.userId !== user.id)
+						.like-img-form(value=`${files.id}`)
+							img.like-img-src(src="/images/unliked.png")
+				.desc-container
+					p.description #{files.description}
+				p #{files.likes} Likes
+				for comment in files.comments
+					p #{files.comment}
