@@ -3,11 +3,11 @@ const session = require("express-sessions");
 const checkLoggedOut = function(req, res, next) {
 	console.log(req.session.userid);
 	if (!req.session.userid) {
-		console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  loggedOutMW %%%%%%%%%%%%%%%%  :")
+		//console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  loggedOutMW %%%%%%%%%%%%%%%%  :")
 		next();
 	} else {
 
-		console.log("$$$$$$$$$$$$$$$$ loggedOutMW $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:  req.session.userid: ", req.session.userid);		
+		//console.log("$$$$$$$$$$$$$$$$ loggedOutMW $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:  req.session.userid: ", req.session.userid);		
 
 
 		res.redirect('/user/home');

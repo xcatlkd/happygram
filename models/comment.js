@@ -2,7 +2,7 @@ const sql = require('../util/sql');
 const Sequelize = require('sequelize');
 
 
-module.exports = sql.define("comment", {
+Comment = sql.define("comment", {
 	id: {		
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -12,3 +12,5 @@ module.exports = sql.define("comment", {
 		type: Sequelize.STRING(150),
 	}
 });
+
+module.exports = Comment;
