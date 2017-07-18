@@ -13,10 +13,8 @@ h1 This is the "Home" page.
 							a(href=`/user/${thisUser.username}`) #{thisUser.username}
 						//- only display like button if a user is signed in and not on their own files
 						if (user && files.userId !== user.id)
-							.like-img-form
-								form.like-box(method="POST", action=`/form/like/${files.id}`, value=`${files.id}`)
-									button
-										img.like-img-src(src="/images/unliked.png")
+							.like-img-form(value=`${files.id}`)
+								img.like-img-src(src="/images/unliked.png")
 					.desc-container
 						p.description #{files.description}
 			//-		
@@ -29,7 +27,7 @@ h1 This is the "Home" page.
 
 //- script.
 //- 	var userId = "#{thisUser.id}"
-//- 	var fileUserId = "#{data.userId}"
+//- 	var fileId = "#{data.Id}"
 //- 	var username = "#{thisUser.username}"
 //- 	var dataObj	= "#{data}"
 

@@ -45,6 +45,7 @@ Files.prototype.like = function(userid) {
 	.then(function(test) {
 		if (test) {
 			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: updated ", test);
+			return test;
 		}
 		else {
 			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::: created");
@@ -52,6 +53,59 @@ Files.prototype.like = function(userid) {
 	})
 };
 
+
+Files.findUser = function(user) {
+	if (user) {
+		User.findOne({ where: {
+			username: user,
+		}})
+		.then(function(user) {
+			if (user) {
+				return user;
+			} else {
+				User.findOne({ where: {
+					userId: user,
+				}})
+				.then(function(user) {
+					return user;
+				})
+			}
+		})
+	} else {
+		return null;
+	}
+};
+
+// Pass this function a user id to create an array of objects for each photo that belongs to that user. 
+// This object will contain references to each photo's comments and likes using the include[] functionality of sequelize.
+// Optionally, pass this function `null` and it will find all photos of all users in the same manner.
+
+Files.createPhotoObject = function(user) {
+	Files.findUser(user).then(function(user) {
+
+	if (user) {
+		console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$ createPhotoObject; user: ", user);
+		return Files.findAll({ where: { 
+			userId: user.id,
+			// include: [
+			// 	{ model: Comments },
+			// 	{ model: Likes },
+			// ],
+		}})
+		.then(function(data) {
+			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$ createPhotoObject; data: ", data);
+			return data;
+		})
+	} else {
+		return Files.findAll({
+			include: [
+				{ model: Comments },
+				{ model: Likes },
+			],
+		})
+	}
+});
+}
 
 Files.hasMany(Comments);
 Files.hasMany(Likes);

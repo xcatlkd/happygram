@@ -105,4 +105,25 @@ router.post("/delete", function(req, res) {
 		}
 	});
 });
+
+router.post("/like/:fileid", function(req, res) {
+	console.log(req.params.fileid);
+	Files.findById(req.params.fileid)
+	.then(function(file) {
+		if (file && req.user && file.userid !== req.user.id) {
+
+			file.like(req.user.id)
+			.then(function(like) {
+				console.log("$$$$$$$$$$$$$ returned from Files.like with true: ", like);
+				res.send({ success: "success" });
+				// res.redirect("../../form/gram");
+			})
+			.catch(function(err) {
+				console.error(err);
+			})
+			
+		}
+	})
+})
+
 module.exports = router;

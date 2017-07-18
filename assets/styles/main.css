@@ -57,6 +57,7 @@ div.form-error {
 
 .landing-title {
 	text-align: center;
+	font-size: 3em;
 }
 .post-obj-container {
 	position: relative;
@@ -79,11 +80,7 @@ div.form-error {
 	Like button 
 ################################################################ */
 .like-img-form {
-	/*background-image: url("../images/unliked.png");*/
-/*	background-repeat: no-repeat;
-	background-position: cover;
-*/	width: 75px;
+	width: 75px;
 	height: 75px;
 
-	/*position: absolute;*/
 }

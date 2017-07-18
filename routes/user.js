@@ -26,12 +26,16 @@ const userAuthMW = require('../middleware/userAuthMW');
 // add a logged in check to the user/home route to redirect to app/home or user page
 
 router.get('/home', function(req, res) {
-	Files.findAll({ where: {
-		userId: req.user.id,
-	}})
-	.then(function(data) {
-		res.render("home", { thisUser: req.user, user: req.user, data: data });
-	});
+	if (req.user) {
+		Files.findAll({ where: {
+			userId: req.user.id,
+		}})
+		.then(function(data) {
+			res.render("home", { thisUser: req.user, user: req.user, data: data });
+		});
+	} else {
+		res.redirect('/');
+	}
 });
 
 router.get('/logout', function(req, res) {
@@ -39,15 +43,6 @@ router.get('/logout', function(req, res) {
 	res.redirect('../');
 });
 
-
-router.get('/:userId', function(req, res) {
-	res.render("home", { user: req.user }) ;
-});
-
-router.get('/logout', function(req, res) {
-	req.session.userid = null;
-	res.redirect('../');
-});
 
 router.get('/:username', function(req, res) {
 	User.findOne({ where: {
@@ -55,6 +50,7 @@ router.get('/:username', function(req, res) {
 	}})
 	.then(function(user) {
 		if (user) {
+			console.log("?????????????????????????????  user: ", user);
 			return user;	
 		}
 		else {
@@ -66,7 +62,7 @@ router.get('/:username', function(req, res) {
 			userId: user.id,
 	}})
 	.then(function(data) {
-		// console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
+		console.log("******************   '/user/:userid'    ******************* user: ", user, " req.user: ", req.user);
 		res.render("home", { thisUser: user, data: data, user: req.user });
 	})
 	.catch(function(err) {
@@ -74,5 +70,30 @@ router.get('/:username', function(req, res) {
 	})
 });
 });
+
+// experimental route utilizing the photo object creation method on Files model.
+
+// router.get('/:username', function(req, res) {
+// 	User.findOne({ where: {
+// 		username: req.params.username,
+// 	}})
+// 	.then(function(user) {
+// 		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!", user);
+// 		if (user) {
+// 			Files.createPhotoObject(user.id);
+// 		}
+// 		else {
+// 			res.render("home", { error: "No such user"});
+// 		}
+// 	})
+// 	.then(function(data) {
+// 		console.log("*********************", data, "*************************");
+// 		res.render("home", { thisUser: user, data: data, user: req.user });
+// 	})
+// 	.catch(function(err) {
+// 		console.error(err);
+// 	})
+// });
+
 
 module.exports = router;
