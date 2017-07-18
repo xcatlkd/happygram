@@ -2,17 +2,11 @@
 
 const express = require('express');
 const router = express.Router();
-// const cookieParser = require('cookie-parser');
-// const bodyParser = require('body-parser');
-// const session = require('express-sessions');
 
 // database configurations  #############################
 
-// const sql = require('../util/sql');
 const User = require('../models/user');
 const File = require('../models/file');
-// const Comment = require('../models/comment');
-// const Like = require('../models/like');
 
 // middleware  #########################################
 
@@ -31,9 +25,8 @@ router.get('/', function(req, res) {
 	File.findAll({ where: {
 		userId: 3,
 	}})
-	.then(function(file) {
-		console.log(file);
-		res.render("landing", { data: file });
+	.then(function(data) {
+		res.render("landing", { data: data });
 	})
 });
 

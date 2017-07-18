@@ -52,36 +52,19 @@ router.post("/:id/description", function(req, res) {
 		}).then(function() {
 
 			res.redirect("/form/gram/");
-
-//Render an individual document
-router.get("/gram/:fileId", function(req, res) {
-	Files.findById(req.params.fileId).then(function(file) {
-			// console.log(file, ")))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((")
-			if (file) {
-				res.render(file.get("id"), "gram", {
-					files: file,
-				});
-			} else {
-				res.status(404);
-				res.render("Not Found", "404");
-			} // console.log(file, ")))))))))))))))))))))))))))))))))))))))))))))))))))))((((((((((((");
 		})
 
 	}).catch(function(err) {
 		console.error("Something went wrong with upload", err);
 
 	});
-	//description: req.body.description
 });
-
-
-
+	
 router.post("/comment", function(req, res) {
 	if (!req.body.fileId || !req.body.comment) {
 		return res.status(500).send("Missing required comment field");
 	}
 	Files.findById(req.body.fileId).then(function(file) {
-		//console.log(req.session.userid, "gggggggggggggggggggggg")
 		if (file) {
 			file.createComment({
 					text: req.body.comment,
@@ -106,32 +89,34 @@ router.get("/gram", function(req, res) {
 		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.\n', JSON.stringify(files), '\n>>>>>>>>>>>>>>>>>>>>>>>>>>\n')
 		res.render("gram", {
 			files: files,
-
-			// 		});
 		});
 
-router.get("/gram", function(req, res) {
-	Files.findAll({ order: [['createdAt', 'DESC']] }).then(function(file) {
-		// console.log(file, "9999999999999999999999999999999999999999999999999999999999999999999999999999999999")
-		res.render("gram", { 
-			files: file,
-
-		});
 	});
 });
-		
-// Sample routes for displaying user & file content
-// test route for creating a like for a photo
+
+router.post("/delete", function(req, res) {
+	Files.findById(req.body.fileId).then(function(file) {
+		if (file) {
+			file.destroy({
+				fileId: req.body.fileId,
+
+			})
+			res.redirect("/form/gram")
+		}
+	});
+});
 
 router.post("/like/:fileid", function(req, res) {
 	console.log(req.params.fileid);
 	Files.findById(req.params.fileid)
 	.then(function(file) {
-		if (file && file.userid !== req.user.id) {
+		if (file && req.user && file.userid !== req.user.id) {
 
-			req.user.like(req.params.fileid)
+			file.like(req.user.id)
 			.then(function(like) {
-				res.redirect("../../form/gram");
+				console.log("$$$$$$$$$$$$$ returned from Files.like with true: ", like);
+				res.send({ success: "success" });
+				// res.redirect("../../form/gram");
 			})
 			.catch(function(err) {
 				console.error(err);
@@ -141,75 +126,4 @@ router.post("/like/:fileid", function(req, res) {
 	})
 })
 
-
-	});
-});
-
-router.post("/delete", function(req, res) {
-	Files.findById(req.body.fileId).then(function(file) {
-		//console.log(req.body.field, "gggggggggggggggggggggg")
-
-		if (file) {
-
-			file.destroy({
-				fileId: req.body.fileId,
-			  id: req.body.id
-			})
-			res.redirect("/form/gram")
-		}
-	});
-});
-
-// router.post("/comment", function(req, res) {
-// 			Files.findById(req.body.fileId).then(function(file) {
-// 				//console.log(req.body.field, "gggggggggggggggggggggg")
-// 				if (!req.body.fileId || !req.body.comment) {
-// 					return res.status(500).send("Missing required comment field");
-// 				}
-// 				if (req.body.btn == "add") {
-// 					Files.findById(req.body.fileId).then(function(file) {
-// 						//console.log(req.session.userid, "gggggggggggggggggggggg")
-// 						if (file) {
-// 							file.createComment({
-// 									text: req.body.comment,
-// 									userId: req.session.userid,
-// 								})
-// 								// .then(function(comment) {
-// 								//     req.user.addComment({
-// 								//     	userId: userId,
-// 								//     })
-// 							res.redirect("/form/gram/");
-// 							// });
-// 						} else {
-// 							res.render(res, "404");
-// 						}
-
-// 					})
-// 				} else {
-// 					Files.findById(req.body.fileId).then(function(file) {
-// 						if (file) {
-
-// 							file.destroy({
-// 								fileId: req.body.fileId
-// 							})
-// 							res.render("gram")
-// 						}
-// 					})
-// 				}
-// 			})
-// })
-			// router.get("/gram", function(req, res) {
-			// 	Files.findAll({
-			// 		order: [
-			// 			['createdAt', 'DESC']
-			// 		]
-			// 	}).then(function(file) 
-			// 		//console.log(file, "999999999999999999999999999999999999999999")
-			// 		res.render("gram", {
-			// 			files: file,
-
-			// 		});
-			// 	});
-			// });
-
-			module.exports = router;
+module.exports = router;

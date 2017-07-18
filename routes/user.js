@@ -16,21 +16,26 @@ const Files = require('../models/file');
 // middleware  #########################################
 
 
-=======
+
 const userAuthMW = require('../middleware/userAuthMW');
 // router.use(userAuthMW);
 
 
 // routes  #############################################
 
+// add a logged in check to the user/home route to redirect to app/home or user page
+
 router.get('/home', function(req, res) {
-	Files.findAll({ where: {
-		userId: req.user.id,
-	}})
-	.then(function(data) {
-		// console.log("******************   '/user/home'    ******************* data: ", data, " req.user: ", req.user);
-		res.render("home", { user: req.user, data: data });
-	})
+	if (req.user) {
+		Files.findAll({ where: {
+			userId: req.user.id,
+		}})
+		.then(function(data) {
+			res.render("home", { thisUser: req.user, user: req.user, data: data });
+		});
+	} else {
+		res.redirect('/');
+	}
 });
 
 router.get('/logout', function(req, res) {
@@ -39,21 +44,13 @@ router.get('/logout', function(req, res) {
 });
 
 
-router.get('/:userId', function(req, res) {
-	res.render("home", { user: req.user }) ;
-});
-
-router.post('/logout', function(req, res) {
-	req.session.destroy();
-	res.redirect('../');
-=======
 router.get('/:username', function(req, res) {
 	User.findOne({ where: {
 		username: req.params.username,
-	}
-	})
+	}})
 	.then(function(user) {
 		if (user) {
+			console.log("?????????????????????????????  user: ", user);
 			return user;	
 		}
 		else {
@@ -63,16 +60,40 @@ router.get('/:username', function(req, res) {
 	.then(function(user) {
 		Files.findAll({ where: {
 			userId: user.id,
-		}})
-		.then(function(data) {
-			// console.log("******************   '/user/:userid'    ******************* data: ", data, " req.user: ", req.user);
-			res.render("home", { user: user, data: data });
-		})
+	}})
+	.then(function(data) {
+		console.log("******************   '/user/:userid'    ******************* user: ", user, " req.user: ", req.user);
+		res.render("home", { thisUser: user, data: data, user: req.user });
 	})
 	.catch(function(err) {
 		console.error(err);
 	})
-
 });
+});
+
+// experimental route utilizing the photo object creation method on Files model.
+
+// router.get('/:username', function(req, res) {
+// 	User.findOne({ where: {
+// 		username: req.params.username,
+// 	}})
+// 	.then(function(user) {
+// 		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!", user);
+// 		if (user) {
+// 			Files.createPhotoObject(user.id);
+// 		}
+// 		else {
+// 			res.render("home", { error: "No such user"});
+// 		}
+// 	})
+// 	.then(function(data) {
+// 		console.log("*********************", data, "*************************");
+// 		res.render("home", { thisUser: user, data: data, user: req.user });
+// 	})
+// 	.catch(function(err) {
+// 		console.error(err);
+// 	})
+// });
+
 
 module.exports = router;
