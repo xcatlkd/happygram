@@ -1,17 +1,18 @@
+include layout.pug
 
 h1.dest Welcome to Happy-Gram!	
-	br
-	.navbar.container
-	.navbar-ul
-		ul.navbar
-			li
-				a(href="/user/home") Home
-			li
-				a(href="/form") Form
-			li
-				a(href="/signup") Signup
-			li
-				a(href="/user/logout") Logout
+	//- br
+	//- .navbar.container
+	//- .navbar-ul
+	//- 	ul.navbar
+	//- 		li
+	//- 			a(href="/user/home") Home
+	//- 		li
+	//- 			a(href="/form") Form
+	//- 		li
+	//- 			a(href="/signup") Signup
+	//- 		li
+	//- 			a(href="/user/logout") Logout
 
 	
 	for file in files
@@ -31,16 +32,15 @@ h1.dest Welcome to Happy-Gram!
 						//- input(type="submit" value="OK")
 		//- img.image(src=`../files/${user.id}.jpg`)
 
-include layout.pug
-	title Images
-include usernav.pug
-h1.dest Welcome to Sami-gram!	
-	br
-	for user in files
-		img.image(src=`../files/${user.id}.jpg`)
-		h3.username 
-			a(href=`/user/${user.userId}`) #{user.userId}
-		p.description #{user.description}
+//- 	title Images
+//- include usernav.pug
+//- h1.dest Welcome to Sami-gram!	
+//- 	br
+//- 	for user in files
+//- 		img.image(src=`../files/${user.id}.jpg`)
+//- 		h3.username 
+//- 			a(href=`/user/${user.userId}`) #{user.userId}
+//- 		p.description #{user.description}
 
 
 	//- form(class="home-form", method="post", action="/form/gram")
