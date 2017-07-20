@@ -50,7 +50,6 @@ router.get('/:username', function(req, res) {
 	}})
 	.then(function(user) {
 		if (user) {
-			console.log("?????????????????????????????  user: ", user);
 			return user;	
 		}
 		else {
@@ -62,7 +61,6 @@ router.get('/:username', function(req, res) {
 			userId: user.id,
 	}})
 	.then(function(data) {
-		console.log("******************   '/user/:userid'    ******************* user: ", user, " req.user: ", req.user);
 		res.render("home", { thisUser: user, data: data, user: req.user });
 	})
 	.catch(function(err) {
