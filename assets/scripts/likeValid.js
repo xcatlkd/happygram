@@ -4,8 +4,10 @@ $(document).ready(function() {
 	var likeImg = $(".like-img-form img");
 	// console.log(like);
 	var values = []
+	console.log(like);
 
 	like.map((indx, vals) => {
+		console.log(indx, vals);
 		// console.log($(vals).attr("value"));
 		values.push($(vals).attr("value"));
 	});
@@ -24,9 +26,10 @@ $(document).ready(function() {
 		console.log("idArray..........", idArray);
 		$.ajax("/form/likes", {
 			method: "POST",
-			// data: idArray,
-			data: JSON.stringify(idArray),
-			success: function() {
+			data: {ids: idArray},
+			// data: JSON.stringify(idArray),
+			success: function(likes) {
+
 				console.log("something happened");
 				console.log(likes);
 			},

@@ -108,13 +108,13 @@ router.post("/delete", function(req, res) {
 });
 
 router.post("/likes", function(req, res) {
-	console.log("$$$$$$$$$$$$$$$$$$$$$ /form/likes $$$$$$$$$$$$ fileId: ", req.body);
+	console.log("$$$$$$$$$$$$$$$$$$$$$ /form/likes $$$$$$$$$$$$ fileId: ", req.body.ids);
 	Likes.findAll({ where: {
-		fileId: req.body,
+		fileid: {$in: req.body.ids},
 	}})
 	.then(function(likes) {
 		console.log("!!   ",likes);
-		res.send({ likes: likes });
+		res.json({ likes: likes });
 	})
 });
 
