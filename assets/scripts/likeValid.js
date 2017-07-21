@@ -15,8 +15,12 @@ $(document).ready(function() {
 	// console.log("values...", values);
 
 	// Change image from unliked to liked
+	function likedChange(target) {
+		$(target).attr("src", "/images/liked.png");
+		$(target).addClass("disable");
+	};
 
-
+	// var liked = $(".like-img-form value='vals.fileid'");
 	// Ajax call queries the db and returns likes for each photo on page load.
 	// Then checks each userId against the current user and changes behavior
 	// of the like button accordingly.
@@ -27,11 +31,13 @@ $(document).ready(function() {
 		$.ajax("/form/likes", {
 			method: "POST",
 			data: {ids: idArray},
-			// data: JSON.stringify(idArray),
 			success: function(likes) {
-
-				console.log("something happened");
-				console.log(likes);
+				likes.likes.forEach((vals, indx) => {
+						if (vals.userid == userId) {
+						var liked = $(`[value=${vals.fileid}] img`)[0];
+						likedChange(liked);
+					}
+				});
 			},
 			error: function() {
 
@@ -45,16 +51,20 @@ $(document).ready(function() {
 	likeImg.on("click", function(event) {
 		event.preventDefault();
 		value = event.target.parentNode.getAttribute('value');
-
-		$.ajax("/form/like/" + value, {
-			method: "POST",
-			success: function() {
-				$(event.target).attr("src", "/images/liked.png");
-			},
-			error: function() {
-				console.error("error");
-			},
-		});
+		if ($(event.target).hasClass("disable")) {
+			console.log("already liked");
+		} 
+		else {
+			$.ajax("/form/like/" + value, {
+				method: "POST",
+				success: function() {
+					likedChange(event.target);
+				},
+				error: function() {
+					console.error("error");
+				},
+			});
+		}
 
 	});
 
