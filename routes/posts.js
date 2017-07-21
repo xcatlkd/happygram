@@ -26,7 +26,7 @@ router.post("/", uploader.single("image"), function(req, res) {
 	//Otherwise, try an upload
 	req.user.upload(req.file, req.body).then(function(data) {
 			// res.json(data)
-			console.log(data, "kkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+
 			res.redirect("/form/" + data.id + "/description")
 		})
 		.catch(function(err) {
@@ -47,25 +47,28 @@ router.post("/:id/description", function(req, res) {
 			id: req.params.id,
 		}
 	}).then(function(file) {
-			
+		//description-only-current-user
 		if (file.userId === req.session.userid) {
 			file.update({
 				description: req.body.description
 			}).then(function() {
-
 				res.redirect("/form/gram/");
 			})
-	 	} 
+		} else {
+console.error("You can't update description", err);
+			res.redirect("/form/gram/");
+		}
 	}).catch(function(err) {
-		console.error("Something went wrong with upload", err);
-	   res.redirect("/form/gram/");
+		console.error("You can't update description", err);
+		res.redirect("/form/gram/");
 
-	 });
+	});
 });
+
 
 router.post("/comment", function(req, res) {
 	if (!req.body.fileId || !req.body.comment) {
-		return res.status(500).send("Missing required comment field");
+		return res.status(404).send("Missing required comment field");
 	}
 	Files.findById(req.body.fileId).then(function(file) {
 		if (file) {
@@ -97,75 +100,26 @@ router.get("/gram", function(req, res) {
 	});
 });
 
+//delete-only-current-user
+
 router.post("/delete", function(req, res) {
-	// console.log(req.session.userid, "ooooooooooooYYYYYYYYYYYYYYYYooooooooo")
-	// console.log(req.body.fileId)
 	Files.findById(req.body.fileId).then(function(file) {
-		console.log(file.userId, "lllllllllllllllllPPPPPPPPPPPPPPPPPPPPPPPPiiiiiiiiii")
-
-		if (file.userId === req.session.userid) {
-			// if (file) {
-			file.destroy({
-				fileId: req.body.fileId,
-
-			})
-			res.redirect("/form/gram")
-
-			// }
-		}
-	});
+			if (file.userId === req.session.userid) {
+				file.destroy({
+					fileId: req.body.fileId,
+				})
+				res.redirect("/form/gram");
+			} else {
+				console.error("Don't have permission to delete", err);
+				res.redirect("/form/gram/");
+			}
+		})
+		.catch(function(err) {
+			console.error("Something went wrong with delete", err);
+			res.redirect("/form/gram/");
+		});
 });
 
-// router.post("/comment", function(req, res) {
-// 			Files.findById(req.body.fileId).then(function(file) {
-// 				//console.log(req.body.field, "gggggggggggggggggggggg")
-// 				if (!req.body.fileId || !req.body.comment) {
-// 					return res.status(500).send("Missing required comment field");
-// 				}
-// 				if (req.body.btn == "add") {
-// 					Files.findById(req.body.fileId).then(function(file) {
-// 						//console.log(req.session.userid, "gggggggggggggggggggggg")
-// 						if (file) {
-// 							file.createComment({
-// 									text: req.body.comment,
-// 									userId: req.session.userid,
-// 								})
-// 								// .then(function(comment) {
-// 								//     req.user.addComment({
-// 								//     	userId: userId,
-// 								//     })
-// 							res.redirect("/form/gram/");
-// 							// });
-// 						} else {
-// 							res.render(res, "404");
-// 						}
 
-// 					})
-// 				} else {
-// 					Files.findById(req.body.fileId).then(function(file) {
-// 						if (file) {
-
-// 							file.destroy({
-// 								fileId: req.body.fileId
-// 							})
-// 							res.render("gram")
-// 						}
-// 					})
-// 				}
-// 			})
-// })
-// router.get("/gram", function(req, res) {
-// 	Files.findAll({
-// 		order: [
-// 			['createdAt', 'DESC']
-// 		]
-// 	}).then(function(file) 
-// 		//console.log(file, "999999999999999999999999999999999999999999")
-// 		res.render("gram", {
-// 			files: file,
-
-// 		});
-// 	});
-// });
 
 module.exports = router;

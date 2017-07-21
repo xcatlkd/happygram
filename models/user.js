@@ -59,7 +59,7 @@ User.prototype.upload = function(file, body) {
 			if (file.mimetype.includes("image/")) {
 				return Jimp.read(file.path).then(function(img) {
 					img.quality(80);
-					img.resize(Jimp.AUTO, 300);
+					img.resize(500, 300);
 					// img.create(file.filename);
 					img.write("assets/files/" + file.filename + ".jpg");
 					return data

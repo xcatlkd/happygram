@@ -51,14 +51,12 @@ const Files = sql.define("file", {
 // };
 
 
-Files.hasMany(Comments);
+Files.hasMany(Comments).ondelete;
 Files.hasMany(Likes);
 
 // create the relations between comments and likes here
 
-// create the relations between comments and likes here
-						Files.hasMany(Comments);
-						Files.hasMany(Likes);
+
 
 
 
