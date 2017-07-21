@@ -1,6 +1,6 @@
+title Home
 include layout.pug
-	title Home
-include usernav.pug
+
 h1 This is the "Home" page.
 	if (thisUser) 
 		p.js-username #{thisUser.username}
@@ -25,7 +25,9 @@ h1 This is the "Home" page.
 	if (error) 
 		p #{error}
 
-//- script.
+script.
+	var userId = "#{user.id}"
+//- 	var jsFiles = "#{data}"
 //- 	var userId = "#{thisUser.id}"
 //- 	var fileId = "#{data.Id}"
 //- 	var username = "#{thisUser.username}"

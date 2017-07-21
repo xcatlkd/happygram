@@ -4,6 +4,7 @@ const Gram = ("./util/gram");
 const router = exp.Router();
 const fs = require("fs-extra");
 const Files = require("../models/file");
+const Likes = require("../models/like");
 const Comment = require("../models/comment");
 const multer = require("multer");
 const uploader = multer({
@@ -106,6 +107,17 @@ router.post("/delete", function(req, res) {
 	});
 });
 
+router.post("/likes", function(req, res) {
+	console.log("$$$$$$$$$$$$$$$$$$$$$ /form/likes $$$$$$$$$$$$ fileId: ", req.body.ids);
+	Likes.findAll({ where: {
+		fileid: {$in: req.body.ids},
+	}})
+	.then(function(likes) {
+		console.log("!!   ",likes);
+		res.json({ likes: likes });
+	})
+});
+
 router.post("/like/:fileid", function(req, res) {
 	console.log(req.params.fileid);
 	Files.findById(req.params.fileid)
@@ -123,7 +135,7 @@ router.post("/like/:fileid", function(req, res) {
 			})
 			
 		}
-	})
-})
+	});
+});
 
 module.exports = router;

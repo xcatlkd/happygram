@@ -12,3 +12,7 @@ html
 			script(src="/scripts/index.js")
 
 	body
+		if (user) 
+			include usernav.pug
+		else
+			include navbar.pug

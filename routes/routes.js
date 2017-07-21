@@ -14,7 +14,7 @@ const File = require('../models/file');
 // else next();
 
 // const sessionMW = require('../middleware/sessionMW');
-const loggedOutMW = require('../middleware/loggedOutMW');
+// const loggedOutMW = require('../middleware/loggedOutMW');
 
 // router.use(sessionMW);
 // router.use(loggedOutMW);
