@@ -19,19 +19,16 @@ $submit.on("click", function(event) {
 			$formUsername.removeClass("hidden");
 		} else {
 			var username = $username.val();
-			console.log(username);
 		}
 		if (!$username.val()) {
 			$formPassword.removeClass("hidden");
 		} else {
 			var password = $password.val();
-			console.log(password);
 		}
 		if ($confirm.length && $confirm.val() !== $password.val()) {
 			$formConfirm.removeClass("hidden");
 		} else if ($confirm.length) {
 			var confirm = $confirm.val();
-			console.log(confirm);
 		}
 		// $ajax submit to server for signup
 		if (bodyId === "signup" && confirm && confirm === password && username) {
