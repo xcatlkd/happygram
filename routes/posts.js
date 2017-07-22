@@ -38,28 +38,6 @@ router.post("/", uploader.single("image"), function(req, res) {
 		});
 })
 
-router.get("/:id/description", function(req, res) {
-	res.render("description")
-})
-
-router.post("/:id/description", function(req, res) {
-	Files.findOne({
-		where: {
-			id: req.params.id,
-		}
-	}).then(function(file) {
-		file.update({
-			description: req.body.description
-		}).then(function() {
-
-			res.redirect("/form/gram/");
-		})
-
-	}).catch(function(err) {
-		console.error("Something went wrong with upload", err);
-
-	});
-});
 	
 router.post("/comment", function(req, res) {
 	if (!req.body.fileId || !req.body.comment) {
@@ -89,7 +67,7 @@ router.get("/gram", function(req, res) {
 	}).then(function(files) {
 		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.\n', JSON.stringify(files), '\n>>>>>>>>>>>>>>>>>>>>>>>>>>\n')
 		res.render("gram", {
-			files: files,
+			files: files, user: req.user,
 		});
 
 	});
@@ -135,6 +113,28 @@ router.post("/like/:fileid", function(req, res) {
 			})
 			
 		}
+	});
+});
+router.get("/:id/description", function(req, res) {
+	res.render("description", { user: req.user });
+})
+
+router.post("/:id/description", function(req, res) {
+	Files.findOne({
+		where: {
+			id: req.params.id,
+		}
+	}).then(function(file) {
+		file.update({
+			description: req.body.description
+		}).then(function() {
+
+			res.redirect("/form/gram/");
+		})
+
+	}).catch(function(err) {
+		console.error("Something went wrong with upload", err);
+
 	});
 });
 
