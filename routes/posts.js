@@ -13,7 +13,7 @@ const uploader = multer({
 
 // Render an upload form that POSTs to /docs/upload
 router.get("/", function(req, res) {
-	res.render("form");
+	res.render("form", { user: req.user });
 });
 
 // Upload the form at GET /docs/upload
@@ -39,7 +39,7 @@ router.post("/", uploader.single("image"), function(req, res) {
 })
 
 router.get("/:id/description", function(req, res) {
-	res.render("description")
+	res.render("description", { user: req.user })
 })
 
 router.post("/:id/description", function(req, res) {
@@ -89,7 +89,7 @@ router.get("/gram", function(req, res) {
 	}).then(function(files) {
 		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.\n', JSON.stringify(files), '\n>>>>>>>>>>>>>>>>>>>>>>>>>>\n')
 		res.render("gram", {
-			files: files,
+			files: files, user: req.user,
 		});
 
 	});
