@@ -55,8 +55,8 @@ router.post("/:id/description", function(req, res) {
 				res.redirect("/form/gram/");
 			})
 		} else {
-console.error("You can't update description", err);
-			res.redirect("/form/gram/");
+			console.error("You can't update description", err);
+			return res.redirect("/form/gram/");
 		}
 	}).catch(function(err) {
 		console.error("You can't update description", err);
@@ -120,6 +120,43 @@ router.post("/delete", function(req, res) {
 		});
 });
 
+router.post("/likes", function(req, res) {
+	console.log("$$$$$$$$$$$$$$$$$$$$$ /form/likes $$$$$$$$$$$$ fileId: ", req.body.ids);
+	Likes.findAll({
+			where: {
+				fileid: {
+					$in: req.body.ids
+				},
+			}
+		})
+		.then(function(likes) {
+			console.log("!!   ", likes);
+			res.json({
+				likes: likes
+			});
+		})
+});
 
+router.post("/like/:fileid", function(req, res) {
+	console.log(req.params.fileid);
+	Files.findById(req.params.fileid)
+		.then(function(file) {
+			if (file && req.user && file.userid !== req.user.id) {
+
+				file.like(req.user.id)
+					.then(function(like) {
+						console.log("$$$$$$$$$$$$$ returned from Files.like with true: ", like);
+						res.send({
+							success: "success"
+						});
+						// res.redirect("../../form/gram");
+					})
+					.catch(function(err) {
+						console.error(err);
+					})
+
+			}
+		})
+})
 
 module.exports = router;
