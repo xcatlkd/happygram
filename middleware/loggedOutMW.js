@@ -1,4 +1,3 @@
-const session = require("express-sessions");
 
 const checkLoggedOut = function(req, res, next) {
 	console.log(req.session.userid);
