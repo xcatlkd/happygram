@@ -17,11 +17,7 @@ h1 This is the "Home" page.
 								img.like-img-src(src="/images/unliked.png")
 					.desc-container
 						p.description #{files.description}
-			//-		
-				if (files.userId === user.id) 
-					form.like-box(method="POST", action=`../form/like/${files.id}`, value=`${files.id}`)
-						button Like
-
+	
 	if (error) 
 		p #{error}
 
