@@ -2,9 +2,12 @@
 
 A photo sharing app that in no way infringes on any other photos sharing apps because it is clearly original and also superior.
 
+Checkout the app on Heroku;
+https://whispering-ocean-44665.herokuapp.com
 
-
-
+A test profile is provided to take a look around;
+username: testuser
+password: testpassword
 
 
 ### Project organization / file tree
