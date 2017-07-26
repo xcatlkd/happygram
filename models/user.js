@@ -1,3 +1,4 @@
+
 const sql = require('../util/sql');
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
@@ -59,7 +60,7 @@ User.prototype.upload = function(file, body) {
 			if (file.mimetype.includes("image/")) {
 				return Jimp.read(file.path).then(function(img) {
 					img.quality(80);
-					img.resize(500, 300);
+					img.resize(Jimp.AUTO, 300);
 					// img.create(file.filename);
 					img.write("assets/files/" + file.filename + ".jpg");
 					return data
@@ -99,59 +100,19 @@ User.signup = function(req) {
 		})
 };
 
-User.prototype.login = function(req) {
-	User.findOne({
-			where: {
-				username: req.body.username,
-			}
-		})
-		.then(function(user) {
-			if (user) {
-				user.comparePassword(req.body.password).then(function(valid) {
-						if (valid) {
-							req.session.userid = user.get("id");
-							req.session.save(function(err) {
-								res.redirect("/user/home");
-							})
-						} else {
-							console.error("bad password");
-						}
-					})
-					.catch(function(err) {
-						console.error(err);
-					})
-			} else {
-				console.error("User not found");
-			}
-		})
-};
-
-
 
 User.prototype.like = function(fileid) {
-	return this.createLike({
-			fileid: fileid,
-		})
-		.then(function(like) {
-			if (like) {
-				//console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
-			} else {
-				//console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
-			}
-		})
-};
-
-
-User.prototype.like = function(fileid) {
-	return this.createLike({
+	return Likes.upsert({
+		userid: this.id,
 		fileid: fileid,
+		liked: true,  	// will need to eventually change this to a value from the page in order to toggle liked / unliked
 	})
-	.then(function(like) {
-		if (like) {
-			//console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: success");
+	.then(function(test) {
+		if (test) {
+			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: updated ", test);
 		}
 		else {
-			//console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::::( no likey");
+			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::: created");
 		}
 	})
 };

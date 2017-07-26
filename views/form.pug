@@ -1,13 +1,18 @@
+
 head 
 	title Posts
 	link(rel="stylesheet", href="styles/reset.css")
 	link(rel="stylesheet", href="styles/main.css")
 
 include navbar.pug
-include layout.pug
+//- include layout.pug
 	
 body#post
 	.container
+
+//- include layout.pug
+.post
+
 	h1.home-title Happy Gram
 form(class="home-form", method="post", enctype="multipart/form-data")
 	label.home-form-file

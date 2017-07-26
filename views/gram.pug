@@ -1,6 +1,7 @@
 include layout.pug
+
 	title Images
-include usernav.pug
+//- include usernav.pug
 
 head 
 	title Posts
@@ -13,20 +14,46 @@ head
 	//- 		a(href=`/user/${user.userId}`) #{user.userId}
 	//- 	p.description #{user.description}
 
-
-
+h1.dest Welcome to Happy-Gram!	
+	
 	for file in files
-		
 		form(class="home-form", method="post", action="/form/delete")
 			img.image(src=`/files/${file.id}.jpg`)
 			input(name="fileId",  type="hidden", value=`${file.get("id")}`)
 			button.delete-btn Delete
 			p.description #{file.description}
-			a(href=`/form/${file.id}/description`) Description
+			a(href=`/form/${file.id}/description`)  Description
 			for comment in file.comments
-				
+				li
 						p.comment #{comment.text}
 		form(class="home-form", method="post", action="/form/comment")
 						input(name="comment", type="text", placeholder="Comment")
 						input(name="fileId", type="hidden", value=`${file.get("id")}`)
 						button.add-btn Add			
+						//- input(type="submit" value="OK")
+		//- img.image(src=`../files/${user.id}.jpg`)
+
+//- 	title Images
+//- include usernav.pug
+//- h1.dest Welcome to Sami-gram!	
+//- 	br
+//- 	for user in files
+//- 		img.image(src=`../files/${user.id}.jpg`)
+//- 		h3.username 
+//- 			a(href=`/user/${user.userId}`) #{user.userId}
+//- 		p.description #{user.description}
+
+
+	//- form(class="home-form", method="post", action="/form/gram")
+	//- 	for file in files
+	//- 		input(name="fileId",  type="hidden", value=`${file.get("id")}`)
+	//- 		img.image(src=`/files/${file.id}.jpg`)
+	//- 		button.delete-btn(type="submit" name="btn" value="delete") Delete
+	//- 		p.description #{file.description}
+	//- 		for comment in file.comments
+	//- 			p.comment #{comment.text}
+	//- 			li
+	//- 				a(href=`/form/${file.id}/description`) Description
+	//- 				input(name="comment",  type="text", placeholder="Comment")
+	//- 				button.add-btn (type="submit" name="btn" value="add") Add
+

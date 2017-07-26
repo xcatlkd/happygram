@@ -1,28 +1,4 @@
- .has-columns
-  width 100%
-  display flex
-  flex-direction row
-  flex-wrap wrap
-  justify-content flex-start
-  align-items stretch
-  box-sizing border-box
-  
-  .column
-    margin auto
-    overflow hidden
-    flex 0 0 100%
-    box-sizing border-box
-    margin 0 $gutter 0 0
-        
-   
-   
-      
-      
-        
-    
-
-      
-
+ 
 /*
 body#signup .hidden {
 	display: none;
@@ -53,9 +29,6 @@ div.form-error {
 	background-color: #ddd;
 }
 
-/* ###############################################################
-	User auth forms 
-################################################################ */
 
 .form-container {
 	width: 75%;
@@ -75,10 +48,15 @@ div.form-error {
 }
 
 /* ###############################################################
-	Landing page 
+	Images
 ################################################################ */
+
 .landing-title {
 	text-align: center;
+	font-size: 3em;
+}
+.post-obj-container {
+	position: relative;
 }
 .img-container {
 	width: 65%;
@@ -91,9 +69,22 @@ div.form-error {
 	width: 100%;
 	margin: 5px auto;
 
+
 }
 
 img.image {
 	display: inline-block;
   margin: 0 auto;
 }
+
+
+
+/* ###############################################################
+	Like button 
+################################################################ */
+.like-img-form {
+	width: 75px;
+	height: 75px;
+
+}
+

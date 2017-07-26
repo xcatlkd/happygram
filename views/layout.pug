@@ -1,13 +1,18 @@
 doctype html
 html
 	head
-		link(rel="stylesheet", href="styles/reset.css")
-		link(rel="stylesheet", href="styles/main.css")
-		script(src="scripts/jquery.js")
+		link(rel="stylesheet", href="/styles/reset.css")
+		link(rel="stylesheet", href="/styles/main.css")
+		link(rel="icon", type="image/png", href="/images/liked.png")
+
 
 		block scripts
-			script(src="scripts/js-cookie.js")
-			script(src="scripts/jquery.js")
-			script(src="scripts/index.js")
+			script(src="/scripts/js-cookie.js")
+			script(src="/scripts/jquery.js")
+			script(src="/scripts/index.js")
 
 	body
+		if (user) 
+			include usernav.pug
+		else
+			include navbar.pug

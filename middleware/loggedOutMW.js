@@ -1,4 +1,3 @@
-const session = require("express-sessions");
 
 const checkLoggedOut = function(req, res, next) {
 	console.log(req.session.userid);
@@ -7,9 +6,8 @@ const checkLoggedOut = function(req, res, next) {
 		next();
 	} else {
 
+
 		//console.log("$$$$$$$$$$$$$$$$ loggedOutMW $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:  req.session.userid: ", req.session.userid);		
-
-
 		res.redirect('/user/home');
 	}
 }
