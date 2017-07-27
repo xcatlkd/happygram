@@ -13,7 +13,7 @@ const uploader = multer({
 
 // Render an upload form that POSTs to /docs/upload
 router.get("/", function(req, res) {
-	res.render("form");
+	res.render("form", { user: req.user });
 });
 
 // Upload the form at GET /docs/upload

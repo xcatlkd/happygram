@@ -84,3 +84,17 @@ div.form-error {
 	height: 75px;
 
 }
+
+/* ###############################################################
+	Signup 
+################################################################ */
+
+
+.loading {
+	width: 20px;
+	height: 20px;
+	border: 1px solid grey;
+	display: inline-block;
+	background-image: url("/images/x.png");
+	background-size: cover;
+}

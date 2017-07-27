@@ -1,10 +1,14 @@
-# Happygram
+# Happy(Samir)gram
 
 A photo sharing app that in no way infringes on any other photos sharing apps because it is clearly original and also superior.
 
+Checkout the app on Heroku;
+https://whispering-ocean-44665.herokuapp.com
 
-
-
+Love posting photos but don't like signing up for stuff?
+A test profile is provided for you to take a look around;
+username: testuser
+password: testpassword
 
 
 ### Project organization / file tree
