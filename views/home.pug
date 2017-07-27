@@ -8,7 +8,7 @@ h1 This is the "Home" page.
 			for files in data
 				.post-obj-conatiner
 					.img-container
-						img.landing-image(src=`/files/${files.id}.jpg`)
+						img.landing-image(src=`/../files/${files.id}.jpg`)
 						h3.username 
 							a(href=`/user/${thisUser.username}`) #{thisUser.username}
 						//- only display like button if a user is signed in and not on their own files
@@ -24,10 +24,5 @@ h1 This is the "Home" page.
 if (user)
 	script.
 		var userId = "#{user.id}"
-//- 	var jsFiles = "#{data}"
-//- 	var userId = "#{thisUser.id}"
-//- 	var fileId = "#{data.Id}"
-//- 	var username = "#{thisUser.username}"
-//- 	var dataObj	= "#{data}"
 
 script(src="../scripts/likeValid.js")

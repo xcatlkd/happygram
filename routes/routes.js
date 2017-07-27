@@ -31,8 +31,8 @@ router.get('/', function(req, res) {
 });
 
 router.get('/signup', function(req, res) {
-		req.session.destroy();
-		res.render("signup", { page: "home" });
+		// req.session.destroy();
+		res.render("signup");
 });
 
 router.post('/signup', function(req, res) {
@@ -42,16 +42,25 @@ router.post('/signup', function(req, res) {
 		.then(function(user) {
 			req.session.userid = user.dataValues.id;
 			req.session.save(function(err) {
+				console.log(err.original.detail, "*************** success case *********");
 				res.redirect("/user/home");
 			});
 					
 		})
 		.catch(function(err) {
-			console.error(err);
+			console.error(err.original.detail, "********* catch case ************");
+			res.render("signup", { error: err.original.detail })
 		})
 	} else {
 
 	}
+});
+
+router.post('/signup/search', function(req, res) {
+	User.search(req.body.username)
+	.then(function(status) {
+		res.json({ status: status });
+	});
 });
 
 router.get('/login', function(req, res) {

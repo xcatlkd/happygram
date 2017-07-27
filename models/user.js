@@ -41,6 +41,7 @@ const User = sql.define('user', {
 
 
 User.prototype.upload = function(file, body) {
+	let image;
 	return this.createFile({
 			id: file.filename,
 			size: file.size,
@@ -50,25 +51,28 @@ User.prototype.upload = function(file, body) {
 		  
 		})
 		.then(function(data) {
+			image = data;
 			const ext = path.extname(file.originalname);
-			const dest = "assets/files/" + file.filename + ext;
-			fs.copy(file.path, dest);
-			return data
+			const dest = "assets/photos/" + file.filename + ext;
+			return	fs.copy(file.path, dest)
 		})
-		.then(function(data) {
+		.then(function() {
 			// If I'm an image
 			if (file.mimetype.includes("image/")) {
-				return Jimp.read(file.path).then(function(img) {
+				return Jimp.read(file.path)
+			.then(function(img) {
 					img.quality(80);
 					img.resize(Jimp.AUTO, 300);
 					// img.create(file.filename);
-					img.write("assets/files/" + file.filename + ".jpg");
-					return data
-				})
+					return	img.write("assets/files/" + file.filename + ".jpg")
+			});
 			}
+			})
+		.then(function() {
+					return image;
+		});
+};
 
-		})
-}
 
 //additional user functionality
 
@@ -88,6 +92,19 @@ User.prototype.comparePassword = function(password) {
 	return bcrypt.compare(password, this.get("password"));
 };
 
+User.search = function(username) {
+	console.log("************************* username: ", username);
+	return User.findOne({ where: {
+		username: username,
+	}})
+	.then(function(user) {
+		if (user) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+};
 
 User.signup = function(req) {
 	return User.create({
@@ -97,7 +114,7 @@ User.signup = function(req) {
 		})
 		.then(function(user) {
 			return user;
-		})
+		});
 };
 
 

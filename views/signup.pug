@@ -1,12 +1,15 @@
 include layout.pug
+	title Signup
 
+body#signup
 	.form-container
 		form(method="POST", id="signup-form")
 			h2 Signup
 			.form-error.js-username.hidden Please enter a valid username
-			br
 			input(name="username", placeholder="Username", type="text" required)
-			.form-error.js-password.hidden Please enter a valid username
+			.loading.js-loading-img
+			.form-error.js-username-error.hidden That username is taken.
+			.form-error.js-password.hidden Password field cannot be blank
 			br
 			input(name="password", placeholder="Password", type="password" required)
 			.form-error.js-confirm.hidden Passwords must match
@@ -15,5 +18,5 @@ include layout.pug
 			br
 			button Submit
 
-
 	script(src="scripts/formSubmit.js")
+	script(src="scripts/signupValid.js")
