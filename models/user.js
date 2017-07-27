@@ -91,6 +91,18 @@ User.prototype.comparePassword = function(password) {
 	return bcrypt.compare(password, this.get("password"));
 };
 
+User.search = function(username) {
+	return User.findOne({ where: {
+		username: username,
+	}})
+	.then(function(user) {
+		if (user) {
+			return true;
+		} else {
+			return false;
+		}
+	})
+};
 
 User.signup = function(req) {
 	return User.create({
@@ -100,7 +112,7 @@ User.signup = function(req) {
 		})
 		.then(function(user) {
 			return user;
-		})
+		});
 };
 
 

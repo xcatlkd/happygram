@@ -66,6 +66,34 @@ $submit.on("click", function(event) {
 		}
 });
 
+$username.on("keyup", function(event) {
+	let searchName = event.target.value;
+	let searchLength = event.target.value.length
+	console.log(searchName, searchLength);
+	if (searchLength >= 3) {
+		// change loading img
+		$.ajax("/signup/search", {
+			method: "POST",
+			data: searchName,
+			success: function(status) {
+				exists = status.status;
+				if (exists === false) {
+					// change loading img to "accepted"
+					console.log("false");
+				}
+				else if (exists === true) {
+					// change loading img to "user exists"
+					// show error to user, suggest alternate name
+					// disable submit button
+					console.log("true wrong");
+				}
+			},
+			error: function() {
 
+			},
+		})
+
+	}
+});
 
 });

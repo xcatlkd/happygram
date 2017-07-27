@@ -6,8 +6,8 @@ body#signup
 		form(method="POST", id="signup-form")
 			h2 Signup
 			.form-error.js-username.hidden Please enter a valid username
-			br
 			input(name="username", placeholder="Username", type="text" required)
+			.loading
 			.form-error.js-password.hidden Please enter a valid username
 			br
 			input(name="password", placeholder="Password", type="password" required)
