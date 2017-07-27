@@ -1,25 +1,12 @@
-
-head 
-	title Posts
-	link(rel="stylesheet", href="styles/reset.css")
-	link(rel="stylesheet", href="styles/main.css")
-
-include navbar.pug
-//- include layout.pug
-	
-body#post
-	.container
-
-//- include layout.pug
+include layout.pug
 .post
-
 	h1.home-title Happy Gram
-form(class="home-form", method="post", enctype="multipart/form-data")
-	label.home-form-file
-		.home-form-file-label1 Choose a file
-		input(class="home-form-file-input", name="image", type="file")
-		//-input(name="description", type="text")
-		button.add-btn Add
+	form(class="home-form", method="post", enctype="multipart/form-data")
+		label.home-form-file
+			.home-form-file-label1 Choose a file
+			input(class="home-form-file-input", name="image", type="file")
+			//-input(name="description", type="text")
+			button.add-btn Add
 
 	
 	
