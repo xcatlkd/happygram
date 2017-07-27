@@ -1,19 +1,5 @@
 include layout.pug
 
-	title Images
-//- include usernav.pug
-
-head 
-	title Posts
-	link(rel="stylesheet", href="styles/reset.css")
-	link(rel="stylesheet", href="/styles/main.css")
-	//- br
-	//- for user in files
-	//- 	img.image(src=`../files/${user.id}.jpg`)
-	//- 	h3.username 
-	//- 		a(href=`/user/${user.userId}`) #{user.userId}
-	//- 	p.description #{user.description}
-
 h1.dest Welcome to Happy-Gram!	
 	
 	for file in files
