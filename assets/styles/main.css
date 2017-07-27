@@ -91,9 +91,10 @@ div.form-error {
 
 
 .loading {
-	width: 15px;
-	height: 15px;
+	width: 20px;
+	height: 20px;
 	border: 1px solid grey;
 	display: inline-block;
-	background-image: ;
+	background-image: url("/images/x.png");
+	background-size: cover;
 }

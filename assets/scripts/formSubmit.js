@@ -21,7 +21,7 @@ $submit.on("click", function(event) {
 		} else {
 			var username = $username.val();
 		}
-		if (!$username.val()) {
+		if (!$password.val()) {
 			$formPassword.removeClass("hidden");
 		} else {
 			var password = $password.val();
@@ -66,34 +66,47 @@ $submit.on("click", function(event) {
 		}
 });
 
-$username.on("keyup", function(event) {
-	let searchName = event.target.value;
-	let searchLength = event.target.value.length
-	console.log(searchName, searchLength);
-	if (searchLength >= 3) {
-		// change loading img
-		$.ajax("/signup/search", {
-			method: "POST",
-			data: searchName,
-			success: function(status) {
-				exists = status.status;
-				if (exists === false) {
-					// change loading img to "accepted"
-					console.log("false");
-				}
-				else if (exists === true) {
-					// change loading img to "user exists"
-					// show error to user, suggest alternate name
-					// disable submit button
-					console.log("true wrong");
-				}
-			},
-			error: function() {
+// 
+// $(document).ready(function() {
 
-			},
-		})
+// var $username = $("input[name='username']");
+// var $loadingImg = $(".js-loading-img");
 
-	}
-});
+// $username.on("keyup", function(event) {
+// 	let searchName = event.target.value;
+// 	let searchLength = event.target.value.length
+// 	console.log(searchName, searchLength);
+// 	if (searchLength >= 3) {
+// 		$loadingImg.css("background-image", "url('/images/loading.gif')");
+// 		$.ajax("/signup/search", {
+// 			method: "POST",
+// 			data: searchName,
+// 			success: function(status) {
+// 				exists = status.status;
+// 				console.log(status.status);
+// 				if (exists === false) {
+// 					$loadingImg.css("background-image", "url('/images/check.jpg')");
+// 					// change loading img to "accepted"
+// 					console.log(exists);
+// 				}
+// 				else if (exists === true) {
+
+// 					// change loading img to "user exists"
+// 					// show error to user, suggest alternate name
+// 					// disable submit button
+// 					console.log(exists);
+// 				}
+// 			},
+// 			error: function() {
+
+// 			},
+// 		})
+
+// 	}
+// 	else {
+// 		$loadingImg.css("background-image", "url('/images/x.png')");
+
+// 	}
+// });
 
 });

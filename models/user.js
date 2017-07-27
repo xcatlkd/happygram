@@ -92,6 +92,7 @@ User.prototype.comparePassword = function(password) {
 };
 
 User.search = function(username) {
+	console.log("************************* username: ", username);
 	return User.findOne({ where: {
 		username: username,
 	}})
