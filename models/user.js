@@ -1,3 +1,4 @@
+
 const sql = require('../util/sql');
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');

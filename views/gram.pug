@@ -1,19 +1,6 @@
 include layout.pug
 
 h1.dest Welcome to Happy-Gram!	
-	//- br
-	//- .navbar.container
-	//- .navbar-ul
-	//- 	ul.navbar
-	//- 		li
-	//- 			a(href="/user/home") Home
-	//- 		li
-	//- 			a(href="/form") Form
-	//- 		li
-	//- 			a(href="/signup") Signup
-	//- 		li
-	//- 			a(href="/user/logout") Logout
-
 	
 	for file in files
 		form(class="home-form", method="post", action="/form/delete")
@@ -55,3 +42,4 @@ h1.dest Welcome to Happy-Gram!
 	//- 				a(href=`/form/${file.id}/description`) Description
 	//- 				input(name="comment",  type="text", placeholder="Comment")
 	//- 				button.add-btn (type="submit" name="btn" value="add") Add
+

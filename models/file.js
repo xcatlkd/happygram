@@ -107,10 +107,9 @@ Files.createPhotoObject = function(user) {
 });
 }
 
-Files.hasMany(Comments);
+Files.hasMany(Comments).ondelete;
 Files.hasMany(Likes);
 
 // create the relations between comments and likes here
-
 
 module.exports = Files;

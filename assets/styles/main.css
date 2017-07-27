@@ -1,7 +1,4 @@
-
-
-
-
+ 
 /*
 body#signup .hidden {
 	display: none;
@@ -48,7 +45,6 @@ div.form-error {
 .hidden {
 	display: none;
 
-
 }
 
 /* ###############################################################
@@ -75,6 +71,13 @@ div.form-error {
 
 
 }
+
+img.image {
+	display: inline-block;
+  margin: 0 auto;
+}
+
+
 
 /* ###############################################################
 	Like button 
