@@ -104,54 +104,33 @@ router.post("/delete", function(req, res) {
 
 router.post("/likes", function(req, res) {
 	console.log("$$$$$$$$$$$$$$$$$$$$$ /form/likes $$$$$$$$$$$$ fileId: ", req.body.ids);
-	Likes.findAll({
-			where: {
-				fileid: {
-					$in: req.body.ids
-				},
-			}
-		})
-		.then(function(likes) {
-			console.log("!!   ", likes);
-			res.json({
-				likes: likes
-			});
-		})
-	Likes.findAll({
-			where: {
-				fileid: {
-					$in: req.body.ids
-				},
-			}
-		})
-		.then(function(likes) {
-			console.log("!!   ", likes);
-			res.json({
-				likes: likes
-			});
-		})
+	Likes.findAll({ where: {
+		fileid: {$in: req.body.ids},
+	}})
+	.then(function(likes) {
+		console.log("!!   ",likes);
+		res.json({ likes: likes });
+	})
 });
 
 router.post("/like/:fileid", function(req, res) {
 	console.log(req.params.fileid);
 	Files.findById(req.params.fileid)
-		.then(function(file) {
-			if (file && req.user && file.userid !== req.user.id) {
+	.then(function(file) {
+		if (file && req.user && file.userid !== req.user.id) {
 
-				file.like(req.user.id)
-					.then(function(like) {
-						console.log("$$$$$$$$$$$$$ returned from Files.like with true: ", like);
-						res.send({
-							success: "success"
-						});
-						// res.redirect("../../form/gram");
-					})
-					.catch(function(err) {
-						console.error(err);
-					});
-
-			}
-		});
+			file.like(req.user.id)
+			.then(function(like) {
+				console.log("$$$$$$$$$$$$$ returned from Files.like with true: ", like);
+				res.send({ success: "success" });
+				// res.redirect("../../form/gram");
+			})
+			.catch(function(err) {
+				console.error(err);
+			})
+			
+		}
+	});
 });
 
 router.get("/:id/description", function(req, res) {
