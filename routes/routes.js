@@ -42,7 +42,6 @@ router.post('/signup', function(req, res) {
 		.then(function(user) {
 			req.session.userid = user.dataValues.id;
 			req.session.save(function(err) {
-				// console.log(err.original.detail, "*************** success case *********");
 				res.redirect("/user/home");
 			});
 					
