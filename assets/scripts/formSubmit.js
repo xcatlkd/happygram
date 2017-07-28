@@ -33,7 +33,6 @@ $submit.on("click", function(event) {
 		}
 		// $ajax submit to server for signup
 		if (bodyId === "signup" && confirm && confirm === password && username) {
-		console.log("What is wrong here.");
 			$.ajax("/signup", {
 				method: "POST",
 				data: {

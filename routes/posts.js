@@ -123,7 +123,6 @@ router.post("/like/:fileid", function(req, res) {
 			.then(function(like) {
 				console.log("$$$$$$$$$$$$$ returned from Files.like with true: ", like);
 				res.send({ success: "success" });
-				// res.redirect("../../form/gram");
 			})
 			.catch(function(err) {
 				console.error(err);
