@@ -6,7 +6,6 @@ $(document).ready(function() {
 	console.log(like);
 
 	like.map((indx, vals) => {
-		console.log(indx, vals);
 		values.push($(vals).attr("value"));
 	});
 
@@ -22,7 +21,6 @@ $(document).ready(function() {
 	function likeRequest(ids) {
 		var idArray = $.makeArray(ids);
 
-		console.log("idArray..........", idArray);
 		$.ajax("/form/likes", {
 			method: "POST",
 			data: {ids: idArray},

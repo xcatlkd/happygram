@@ -103,7 +103,6 @@ router.post("/delete", function(req, res) {
 })
 
 router.post("/likes", function(req, res) {
-	console.log("$$$$$$$$$$$$$$$$$$$$$ /form/likes $$$$$$$$$$$$ fileId: ", req.body.ids);
 	Likes.findAll({ where: {
 		fileid: {$in: req.body.ids},
 	}})
@@ -121,7 +120,6 @@ router.post("/like/:fileid", function(req, res) {
 
 			file.like(req.user.id)
 			.then(function(like) {
-				console.log("$$$$$$$$$$$$$ returned from Files.like with true: ", like);
 				res.send({ success: "success" });
 			})
 			.catch(function(err) {

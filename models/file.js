@@ -44,11 +44,10 @@ Files.prototype.like = function(userid) {
 	})
 	.then(function(test) {
 		if (test) {
-			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: updated ", test);
 			return test;
 		}
 		else {
-			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::: created");
+			console.error("Error; Files.like");
 		}
 	})
 };
@@ -84,7 +83,6 @@ Files.createPhotoObject = function(user) {
 	Files.findUser(user).then(function(user) {
 
 	if (user) {
-		console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$ createPhotoObject; user: ", user);
 		return Files.findAll({ where: { 
 			userId: user.id,
 			// include: [
@@ -93,7 +91,6 @@ Files.createPhotoObject = function(user) {
 			// ],
 		}})
 		.then(function(data) {
-			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$ createPhotoObject; data: ", data);
 			return data;
 		})
 	} else {

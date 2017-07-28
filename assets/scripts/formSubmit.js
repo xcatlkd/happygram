@@ -15,7 +15,6 @@ var $formConfirm = $(".js-confirm");
 
 $submit.on("click", function(event) {
 		event.preventDefault();
-		console.log("Clicked");
 		if (!$username.val()) {
 			$formUsername.removeClass("hidden");
 		} else {
