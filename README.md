@@ -7,7 +7,9 @@ https://whispering-ocean-44665.herokuapp.com
 
 Love posting photos but don't like signing up for stuff?
 A test profile is provided for you to take a look around;
-username: testuser
+
+username: testuser 
+
 password: testpassword
 
 
