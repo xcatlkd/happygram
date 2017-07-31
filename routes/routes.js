@@ -81,17 +81,16 @@ router.post('/login', function(req, res) {
 					});
 				}
 				else {
-					console.error("bad password");
 					res.render("login", { error: "Password is not valid" });
+					console.error("bad password");
 				}
 			})
 			.catch(function(err) {
 				console.error(err);
 			})
 		} else {
+			res.render("login", { error: "Username is not valid" });
 			console.error("User not found");
-			res.locals.nameError = "Username is not valid";
-			res.render("login");
 		}
 	});
 });
