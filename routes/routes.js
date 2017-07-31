@@ -48,7 +48,7 @@ router.post('/signup', function(req, res) {
 		})
 		.catch(function(err) {
 			console.error(err.original.detail, "********* catch case ************");
-			res.render("signup", { error: err.original.detail })
+			res.render("signup", { error: err.original.detail });
 		})
 	} else {
 
@@ -82,6 +82,7 @@ router.post('/login', function(req, res) {
 				}
 				else {
 					console.error("bad password");
+					res.render("login", { error: "Password is not valid" });
 				}
 			})
 			.catch(function(err) {
@@ -89,6 +90,8 @@ router.post('/login', function(req, res) {
 			})
 		} else {
 			console.error("User not found");
+			res.locals.nameError = "Username is not valid";
+			res.render("login");
 		}
 	});
 });

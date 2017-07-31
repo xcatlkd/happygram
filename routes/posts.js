@@ -4,11 +4,9 @@ const Gram = ("./util/gram");
 const router = exp.Router();
 const fs = require("fs-extra");
 const Files = require("../models/file");
-
-
 const Likes = require("../models/like");
-
 const Comment = require("../models/comment");
+
 const multer = require("multer");
 const uploader = multer({
 	dest: "uploads/"
@@ -51,12 +49,7 @@ router.post("/comment", function(req, res) {
 					text: req.body.comment,
 					userId: req.session.userid,
 				})
-				// .then(function(comment) {
-				//     req.user.addComment({
-				//     	userId: userId,
-				//     })
 			res.redirect("/form/gram");
-			// });
 		} else {
 			res.render(res, "404");
 		}
@@ -132,7 +125,8 @@ router.post("/like/:fileid", function(req, res) {
 
 router.get("/:id/description", function(req, res) {
 	res.render("description", {
-		user: req.user
+		user: req.user,
+		fileid: req.params.id,
 	});
 });
 

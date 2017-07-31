@@ -6,9 +6,10 @@ body#signup
 		form(method="POST", id="signup-form")
 			h2 Signup
 			.form-error.js-username.hidden Please enter a valid username
+			.form-error.js-tooLong.hidden Usernames can only be 64 characters long
 			input(name="username", placeholder="Username", type="text" required)
 			.loading.js-loading-img
-			.form-error.js-username-error.hidden That username is taken.
+			.form-error.js-username-error.hidden That username is taken
 			br
 			.form-error.js-password.hidden Password field cannot be blank
 			input(name="password", placeholder="Password", type="password" required)

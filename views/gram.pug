@@ -23,10 +23,11 @@ h1.dest Welcome to Happy-Gram!
 			for comment in file.comments
 				li
 					p.comment #{comment.text}
-		form(class="home-form", method="post", action="/form/comment")
-						input(name="comment", type="text", placeholder="Comment")
-						input(name="fileId", type="hidden", value=`${file.get("id")}`)
-						button.add-btn Add			
+		if user
+			form(class="home-form", method="post", action="/form/comment")
+							input(name="comment", type="text", placeholder="Comment")
+							input(name="fileId", type="hidden", value=`${file.get("id")}`)
+							button.add-btn Add			
 
 		if (error) 
 			p #{error}

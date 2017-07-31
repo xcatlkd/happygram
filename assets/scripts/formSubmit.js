@@ -11,6 +11,9 @@ var $submit = $("button");
 var $formUsername = $(".js-username");
 var $formPassword = $(".js-password");
 var $formConfirm = $(".js-confirm");
+var $formTooLong = $(".js-tooLong");
+var $formErrors = $(".form-error");
+var $inputs = $("input");
 
 
 $submit.on("click", function(event) {
@@ -18,7 +21,12 @@ $submit.on("click", function(event) {
 		if (!$username.val()) {
 			$formUsername.removeClass("hidden");
 		} else {
-			var username = $username.val();
+			if ($username.val().length <= 64) {
+				var username = $username.val();
+			} else {
+				$formTooLong.removeClass("hidden");
+				$username.val("");
+			}
 		}
 		if (!$password.val()) {
 			$formPassword.removeClass("hidden");
@@ -63,5 +71,10 @@ $submit.on("click", function(event) {
 			});
 		}
 });
+
+$inputs.on("keydown", function(event) {
+	$formErrors.addClass("hidden");
+})
+
 
 });
