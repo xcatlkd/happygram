@@ -42,14 +42,13 @@ router.post('/signup', function(req, res) {
 		.then(function(user) {
 			req.session.userid = user.dataValues.id;
 			req.session.save(function(err) {
-				console.log(err.original.detail, "*************** success case *********");
 				res.redirect("/user/home");
 			});
 					
 		})
 		.catch(function(err) {
 			console.error(err.original.detail, "********* catch case ************");
-			res.render("signup", { error: err.original.detail })
+			res.render("signup", { error: err.original.detail });
 		})
 	} else {
 
@@ -82,6 +81,7 @@ router.post('/login', function(req, res) {
 					});
 				}
 				else {
+					res.render("login", { error: "Password is not valid" });
 					console.error("bad password");
 				}
 			})
@@ -89,10 +89,14 @@ router.post('/login', function(req, res) {
 				console.error(err);
 			})
 		} else {
+			res.render("login", { error: "Username is not valid" });
 			console.error("User not found");
 		}
 	});
 });
 
+router.get('/*', function(req, res) {
+	res.render("404");
+});
 
 module.exports = router;

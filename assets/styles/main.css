@@ -68,16 +68,16 @@ div.form-error {
 .img-container img {
 	width: 100%;
 	margin: 5px auto;
-
-
 }
 
-img.image {
-	display: inline-block;
-  margin: 0 auto;
+.imgage-404 {
+	width: 65%;
+	margin: 20px auto;
 }
 
-
+.preview-image {
+	width: 50%;
+}
 
 /* ###############################################################
 	Like button 

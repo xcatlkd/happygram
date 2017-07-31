@@ -4,11 +4,9 @@ const Gram = ("./util/gram");
 const router = exp.Router();
 const fs = require("fs-extra");
 const Files = require("../models/file");
-
-
 const Likes = require("../models/like");
-
 const Comment = require("../models/comment");
+
 const multer = require("multer");
 const uploader = multer({
 	dest: "uploads/"
@@ -51,12 +49,7 @@ router.post("/comment", function(req, res) {
 					text: req.body.comment,
 					userId: req.session.userid,
 				})
-				// .then(function(comment) {
-				//     req.user.addComment({
-				//     	userId: userId,
-				//     })
 			res.redirect("/form/gram");
-			// });
 		} else {
 			res.render(res, "404");
 		}
@@ -103,7 +96,6 @@ router.post("/delete", function(req, res) {
 })
 
 router.post("/likes", function(req, res) {
-	console.log("$$$$$$$$$$$$$$$$$$$$$ /form/likes $$$$$$$$$$$$ fileId: ", req.body.ids);
 	Likes.findAll({ where: {
 		fileid: {$in: req.body.ids},
 	}})
@@ -121,9 +113,7 @@ router.post("/like/:fileid", function(req, res) {
 
 			file.like(req.user.id)
 			.then(function(like) {
-				console.log("$$$$$$$$$$$$$ returned from Files.like with true: ", like);
 				res.send({ success: "success" });
-				// res.redirect("../../form/gram");
 			})
 			.catch(function(err) {
 				console.error(err);
@@ -135,7 +125,8 @@ router.post("/like/:fileid", function(req, res) {
 
 router.get("/:id/description", function(req, res) {
 	res.render("description", {
-		user: req.user
+		user: req.user,
+		fileid: req.params.id,
 	});
 });
 
@@ -165,5 +156,8 @@ res.redirect("/form/gram/");
 });
 });
 
+router.get('/*', function(req, res) {
+	res.render("404");
+});
 
 module.exports = router;

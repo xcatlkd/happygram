@@ -1,7 +1,10 @@
 include layout.pug
-h1.home-title Happy Gram
-	form(class="home-form", method="post")
-		//- img.image(src=`../files/${user.id}.jpg`)
-		textarea(name="description", rows="4", class="add-text", placeholder="Description")
-		button.add-btn Add
+h1.home-title Happy Gram; add a description
+	.post-obj-conatiner
+		.img-container
+			img.preview-image(src=`/../files/${fileid}.jpg`)
+			form(class="home-form", method="post")
+				//- img.image(src=`../files/${user.id}.jpg`)
+				textarea(name="description", rows="4", class="add-text", placeholder="Description")
+				button.add-btn Add
 		

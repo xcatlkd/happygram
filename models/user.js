@@ -93,7 +93,6 @@ User.prototype.comparePassword = function(password) {
 };
 
 User.search = function(username) {
-	console.log("************************* username: ", username);
 	return User.findOne({ where: {
 		username: username,
 	}})
@@ -126,10 +125,10 @@ User.prototype.like = function(fileid) {
 	})
 	.then(function(test) {
 		if (test) {
-			console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ User.like $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$:: updated ", test);
+			console.log(test);
 		}
 		else {
-			console.error("::::::::::::::::::::::::::::::::::::::::::::::::::::  User.like ::::::::::::::::::::::::::::: created");
+			console.error("??");
 		}
 	})
 };

@@ -11,6 +11,8 @@ body#login
 			.form-error.js-password.hidden Please enter a valid password
 			input(name="password", placeholder="Password", type="password")
 			br
+			if error
+				.form-error.js-username-error.hidden #{error}
 			button Submit
 
 	script(src="scripts/formSubmit.js")
