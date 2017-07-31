@@ -42,9 +42,9 @@ const postsRoutes = require('./routes/posts');
 // const renderTemplate = require("./util/renderTemplate");
 // const posts = require('./routes/posts');
 
-app.use('/', routes);
 app.use('/user', user);
-app.use("/form", postsRoutes);
+app.use('/form', postsRoutes);
+app.use('/', routes);
 // app.use('/posts', posts);
 
 // File structure configurations #################################

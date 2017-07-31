@@ -69,6 +69,7 @@ router.get('/:username', function(req, res) {
 });
 });
 
+
 // experimental route utilizing the photo object creation method on Files model.
 
 // router.get('/:username', function(req, res) {

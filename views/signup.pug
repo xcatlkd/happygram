@@ -9,11 +9,11 @@ body#signup
 			input(name="username", placeholder="Username", type="text" required)
 			.loading.js-loading-img
 			.form-error.js-username-error.hidden That username is taken.
+			br
 			.form-error.js-password.hidden Password field cannot be blank
-			br
 			input(name="password", placeholder="Password", type="password" required)
-			.form-error.js-confirm.hidden Passwords must match
 			br
+			.form-error.js-confirm.hidden Passwords must match
 			input(name="confirm", placeholder="Confirm your password", type="password" required)
 			br
 			button Submit

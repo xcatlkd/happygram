@@ -162,5 +162,8 @@ res.redirect("/form/gram/");
 });
 });
 
+router.get('/*', function(req, res) {
+	res.render("404");
+});
 
 module.exports = router;
